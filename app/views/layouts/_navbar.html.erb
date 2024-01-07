@@ -1,0 +1,2 @@
+<%= button_to 'logout', destroy_faculty_session_path, method: :delete if faculty_signed_in? %>
+<%= link_to "Log in", new_session_path(:faculty) unless faculty_signed_in? %><br />

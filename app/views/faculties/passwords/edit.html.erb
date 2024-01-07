@@ -1,0 +1,29 @@
+<body class="login-background">
+
+<div class="overlay">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <div class="con">
+      <header class="head-form">
+        <h2>Change your password</h2>
+      </header>
+      <br>
+      <div class="field-set">
+        <%= render "faculties/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+        <% end %>
+        <%= f.password_field :password, autocomplete: "current-password", autofocus: true, class: "form-input", placeholder: "Password" %>
+        <%= f.password_field :password_confirmation, autocomplete: "current-password", class: "form-input", placeholder: "Password" %>
+
+        <div class="actions">
+          <%= f.submit "Change my password", class: "log-in" %>
+        </div>
+        <%= render "faculties/shared/links" %>
+
+      </div>
+    </div>
+  <% end %>
+</div>
+</body>

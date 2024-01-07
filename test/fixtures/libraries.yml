@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  library_id: 1
+  name: MyString
+  location: MyString
+  established_date: 2024-01-07
+  opening_hours_start: 2024-01-07 20:09:25
+  opening_hours_end: 2024-01-07 20:09:25
+  email: MyString
+
+two:
+  library_id: 1
+  name: MyString
+  location: MyString
+  established_date: 2024-01-07
+  opening_hours_start: 2024-01-07 20:09:25
+  opening_hours_end: 2024-01-07 20:09:25
+  email: MyString
