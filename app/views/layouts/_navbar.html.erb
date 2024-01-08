@@ -1,8 +1,13 @@
 <% if faculty_signed_in? %>
   <%= button_to 'logout', destroy_faculty_session_path, method: :delete %>
-  <%= link_to "category", categories_path %>
-  <%= link_to "book", books_path %>
-  <%= link_to 'faculty', staffs_path %>
+  <% if current_faculty.admin? %>
+    <%= link_to 'Category', categories_path %>
+    <%= link_to 'Book', books_path %>
+    <%= link_to 'Faculty', staffs_path %>
+  <% else %>
+    <%= link_to 'Member', members_path %>
+    <%= link_to 'Entry', library_entry_members_path %>
+  <% end %>
 <% else %>
   <%= link_to "Log in", new_session_path(:faculty) %><br />
 <% end %>

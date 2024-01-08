@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :members do
+    get :library_entry, on: :collection
+    resources :entries
+  end
   resources :books
   resources :categories
   devise_for :faculties, controllers: {

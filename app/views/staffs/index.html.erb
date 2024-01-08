@@ -3,12 +3,13 @@
   <thead>
   <tr>
     <th style="width: 10%;">first_name</th>
-    <th style="width: 18%;">last_name</th>
-    <th style="width: 14%;">Email</th>
-    <th style="width: 14%;">Join date</th>
-    <th style="width: 14%;">Phone no</th>
-    <th style="width: 14%;">dob</th>
-    <th style="width: 20%;">Action   <%= link_to "New staff", new_staff_path %>
+    <th style="width: 10%;">last_name</th>
+    <th style="width: 10%;">Email</th>
+    <th style="width: 10%;">role</th>
+    <th style="width: 10%;">Join date</th>
+    <th style="width: 10%;">Phone no</th>
+    <th style="width: 10%;">dob</th>
+    <th style="width: 10%;">Action   <%= link_to "New staff", new_staff_path %>
     </th>
   </tr>
   </thead>
@@ -19,6 +20,7 @@
         <td><%= faculty.first_name %></td>
         <td><%= faculty.last_name %></td>
         <td><%= faculty.email %></td>
+        <td><%= faculty.user_type %></td>
         <td><%= faculty.doj %></td>
         <td><%= faculty.phone_no %></td>
         <td><%= faculty.dob %></td>

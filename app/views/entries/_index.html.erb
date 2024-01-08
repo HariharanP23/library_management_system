@@ -1,0 +1,32 @@
+<h1>Entries</h1>
+<table class="table table-hover table-dark", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 15%;">Book</th>
+    <th style="width: 15%;">Start date</th>
+    <th style="width: 20%;">Due date</th>
+    <th style="width: 20%;">Return date</th>
+    <th style="width: 20%;">Fine amount</th>
+    <th><%= link_to "New entry", new_member_entry_path(member.id) %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if entries.present? %>
+      <% entries.each do |entry| %>
+        <tr>
+          <td><%= entry.book.title %></td>
+          <td><%= entry.acquisition_date %></td>
+          <td><%= entry.due_date %><i class="fa fa-plus" aria-hidden="true"></i>
+          </td>
+          <td><%= entry.return_date %></td>
+          <td><%= entry.fine_amount %></td>
+          <td><%= link_to "update this entry", edit_member_entry_path(member.id, entry)  %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p> No entries available </p>
+    <% end %>
+  </div>
+  </tbody>
+</table>

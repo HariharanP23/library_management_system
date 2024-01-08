@@ -1,0 +1,26 @@
+<h1>Members</h1>
+
+<table class="table table-hover table-dark", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 9%;">Code</th>
+    <th style="width: 9%;">Name</th>
+    <th style="width: 9%;">Email</th>
+    <th style="width: 12%;">DOB</th>
+    <th style="width: 9%;">Phone No</th>
+    <th style="width: 9%;">Expired at</th>
+    <th style="width: 9%;">Amount</th>
+    <th style="width: 20%;">Action<%= link_to "New member", new_member_path %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="members">
+    <% @members.each do |member| %>
+      <%= render member %>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+
+

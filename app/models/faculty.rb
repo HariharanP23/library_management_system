@@ -5,6 +5,9 @@ class Faculty < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :library
 
+  # validations
+  validates :email, uniqueness: true, presence: true
+
   def admin?
     user_type == 'Admin'
   end
