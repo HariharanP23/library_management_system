@@ -10,9 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_150640) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_07_171118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "author"
+    t.string "isbn"
+    t.date "published_date"
+    t.integer "copies_available"
+    t.integer "total_copies"
+    t.integer "price"
+    t.string "row"
+    t.text "description"
+    t.bigint "category_id", null: false
+    t.bigint "library_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_books_on_category_id"
+    t.index ["library_id"], name: "index_books_on_library_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "library_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["library_id"], name: "index_categories_on_library_id"
+  end
 
   create_table "faculties", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_150640) do
   end
 
   create_table "libraries", force: :cascade do |t|
-    t.integer "library_id"
+    t.string "library_id"
     t.string "name"
     t.string "location"
     t.date "established_date"
@@ -46,5 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_150640) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "books", "categories"
+  add_foreign_key "books", "libraries"
+  add_foreign_key "categories", "libraries"
   add_foreign_key "faculties", "libraries"
 end

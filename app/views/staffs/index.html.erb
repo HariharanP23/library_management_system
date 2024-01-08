@@ -1,0 +1,30 @@
+<h1>Faculties</h1>
+<table class="table table-hover table-dark", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 10%;">first_name</th>
+    <th style="width: 18%;">last_name</th>
+    <th style="width: 14%;">Email</th>
+    <th style="width: 14%;">Join date</th>
+    <th style="width: 14%;">Phone no</th>
+    <th style="width: 14%;">dob</th>
+    <th style="width: 20%;">Action   <%= link_to "New staff", new_staff_path %>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="users">
+    <% @faculties.each do |faculty| %>
+      <tr>
+        <td><%= faculty.first_name %></td>
+        <td><%= faculty.last_name %></td>
+        <td><%= faculty.email %></td>
+        <td><%= faculty.doj %></td>
+        <td><%= faculty.phone_no %></td>
+        <td><%= faculty.dob %></td>
+<!--        <td><%#= link_to "Show this user", faculty %></td>-->
+      </tr>
+    <% end %>
+  </div>
+  </tbody>
+</table>

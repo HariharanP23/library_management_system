@@ -1,7 +1,7 @@
 class CreateLibraries < ActiveRecord::Migration[7.1]
   def change
     create_table :libraries do |t|
-      t.integer :library_id
+      t.string :library_id
       t.string :name
       t.string :location
       t.date :established_date

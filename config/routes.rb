@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :books
+  resources :categories
   devise_for :faculties, controllers: {
     sessions: 'faculties/sessions',
     registrations: 'faculties/registrations',
     passwords: 'faculties/passwords'
   }
+  resources :staffs, only: %i[ index new create ]
   resources :libraries
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

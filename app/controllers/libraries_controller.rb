@@ -9,10 +9,20 @@ class LibrariesController < ApplicationController
 
   # GET /libraries/1 or /libraries/1.json
   def show
+    if faculty_signed_in? && current_faculty.admin?
+      redirect_to books_path
+    elsif faculty_signed_in? && current_faculty.staff?
+      redirect_to root_url
+    end
   end
 
   # GET /libraries/new
   def new
+    if faculty_signed_in? && current_faculty.admin?
+      redirect_to books_path
+    elsif faculty_signed_in? && current_faculty.staff?
+      redirect_to root_url
+    end
     @library = Library.new
   end
 

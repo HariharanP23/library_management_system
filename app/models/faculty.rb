@@ -3,4 +3,13 @@ class Faculty < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  belongs_to :library
+
+  def admin?
+    user_type == 'Admin'
+  end
+
+  def staff?
+    user_type == 'Staff'
+  end
 end

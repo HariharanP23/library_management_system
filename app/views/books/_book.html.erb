@@ -1,0 +1,14 @@
+<div id="<%= dom_id book %>">
+  <tr>
+    <td><%= book.isbn %></td>
+    <td><%= book.title %></td>
+    <td><%= book.author %></td>
+    <td><%= book.published_date %></td>
+    <td><%= book.copies_available %></td>
+    <td><%= book.total_copies %></td>
+    <td><%= book.category.name %></td>
+    <td><%= book.price %></td>
+    <td><%= book.row %></td>
+    <td><%= link_to "Show this book", book %></td>
+  </tr>
+</div>
