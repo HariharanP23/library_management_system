@@ -1,11 +1,17 @@
 class EntriesController < ApplicationController
   before_action :set_library
   before_action :set_member
-  before_action :set_entry, only: %i[ edit update destroy ]
+  before_action :set_entry, only: %i[ edit update destroy update_return_date ]
 
   # GET /entries/new
   def new
     @entry = Entry.new
+  end
+
+  def update_return_date
+    @entry.update!(return_date: Date.today)
+    @entry.update!(fine_amount: calculate(@entry))
+    redirect_to member_url(@member.id)
   end
 
   # GET /entries/1/edit
@@ -63,11 +69,20 @@ class EntriesController < ApplicationController
   end
 
     def set_entry
-      @entry = Entry.find(params[:id])
+      @entry = @member.entries.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def entry_params
       params.require(:entry).permit(:book_id, :acquisition_date, :due_date, :return_date, :fine_amount, :member_id, :library_id)
     end
+
+  def calculate(entry)
+    if entry.due_date.present?
+      date_difference = Date.today - entry.due_date
+      fine_per_day = 10 # Adjust this value based on your requirements
+      fine = date_difference * fine_per_day
+      fine
+    end
+  end
 end

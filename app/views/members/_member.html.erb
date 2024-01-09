@@ -7,6 +7,23 @@
     <td><%= member.phone_no %></td>
     <td><%= member.expired_at %></td>
     <td><%= member.amount %></td>
-    <td><%= link_to "Show this book", member %></td>
+    <td style="display: flex;justify-content: space-around;">
+      <%= link_to  member do %>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to edit_member_path(member) do %>
+        <i class="fa fa-edit" style="font-size: 22px;"></i>
+      <% end %>
+      <%= link_to member do%>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      <% end %>
+    </td>
   </tr>
+</div>
+
+<div>
+<!--  <%#= link_to "Edit this member", edit_member_path(@member) %> |-->
+  <%#= link_to "Back to members", members_path %>
+
+  <%#= button_to "Destroy this member", @member, method: :delete %>
 </div>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :members do
     get :library_entry, on: :collection
-    resources :entries
+    resources :entries do
+      get :update_return_date, on: :member
+    end
   end
   resources :books
   resources :categories
