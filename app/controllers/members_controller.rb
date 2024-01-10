@@ -64,6 +64,17 @@ class MembersController < ApplicationController
     @entries = @library.entries.all
   end
 
+  def fetch_members
+    @members = @library.members.limit(params[:length]).offset(params[:start])
+    @member_json = {}
+    @member_json['draw'] = params[:draw]
+    @member_json['recordsTotal'] = @library.members.all.count
+    @member_json['recordsFiltered'] = @library.members.all.count
+    @member_json['data'] = @members
+
+    render json: @member_json.as_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_library

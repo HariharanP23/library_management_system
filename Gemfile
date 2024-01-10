@@ -81,3 +81,6 @@ gem "pagy", "~> 6.2"
 gem "ransack", "~> 4.1"
 
 gem "letter_opener", "~> 1.8"
+gem "sassc-rails"
+gem 'bootstrap-sass'
+gem 'jquery-datatables-rails'

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :entries do
       get :update_return_date, on: :member
     end
+    get :fetch_members, on: :collection
   end
   resources :books
   resources :categories

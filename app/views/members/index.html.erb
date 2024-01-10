@@ -4,28 +4,55 @@
     <%= link_to "New member", new_member_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
   </div>
 
-<table class="table table-hover ", style="text-align: left;">
-  <thead>
-  <tr>
-    <th style="width: 9%;">Code</th>
-    <th style="width: 9%;">Name</th>
-    <th style="width: 9%;">Email</th>
-    <th style="width: 12%;">DOB</th>
-    <th style="width: 9%;">Phone No</th>
-    <th style="width: 9%;">Expired at</th>
-    <th style="width: 9%;">Amount</th>
-    <th style="width: 9%;">Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <div id="members">
-    <% @members.each do |member| %>
-      <%= render member %>
-    <% end %>
-  </div>
-  </tbody>
+<table class="display myDt", style="text-align: left;">
 </table>
 
 </div>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+<script>
+    var dTparams;
+  $(document).ready(function(){
+       $('.myDt').DataTable({
+          sPagingType: 'simple',
+          serverSide: true,
+          ajax: {
+              url: 'members/fetch_members',
+              dataSrc: 'data'
+          },
+          columns: [
+              { title: 'Code', data: 'code' },
+              { title: 'Name', data: 'name'},
+              { title: 'Email', data: 'email' },
+              { title: 'DOB', date: 'dob', render: function (data) { if (data == null) return 'yyyy/mm/dd'} },
+              { title: 'Phone No', date: 'phone_no', render: function (data) { if (data == null) return ''} },
+              { title: 'Expired at', date: 'expired_at', render: function (data) { if (data == null) return 'yyyy/mm/dd'} },
+              { title: 'Amount', date: 'amount', render: function (data) { if (data == null) return ''} }
+          ]
+      });
+  });
+    function membersFetch() {
+        var inputParams = {};
+        inputParams.start = dTparams.start;
+        inputParams.length = dTparams.length;
+        inputParams.draw = dTparams.draw;
+        return getMembers(inputParams);
+    }
 
-
+    function getMembers(params) {
+        return $.ajax({
+            url: 'members/fetch_members',
+            type: 'GET',
+            data: params,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+    var dataTable = $('.myDt').DataTable();
+    document.addEventListener("turbolinks:before-cache", function() {
+        if (dataTable !== null) {
+            dataTable.destroy();
+            dataTable = null;
+        }
+    });
+</script>
