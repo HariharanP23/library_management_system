@@ -11,4 +11,12 @@ class FacultyMailer < ApplicationMailer
       subject: "Welcome to Project"
     )
   end
+  def expiration_reminder(user)
+    @email = user.email
+    @days_until_expiration = user.expired_at - Date.today
+    mail(
+      to: @email,
+      subject: "Your subscription is expiring soon"
+    )
+  end
 end
