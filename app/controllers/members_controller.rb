@@ -10,6 +10,7 @@ class MembersController < ApplicationController
   # GET /members/1 or /members/1.json
   def show
     @entries = @member.entries.all
+    @entry = Entry.new
   end
 
   # GET /members/new

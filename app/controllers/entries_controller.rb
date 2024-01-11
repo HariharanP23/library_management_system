@@ -21,8 +21,6 @@ class EntriesController < ApplicationController
   # POST /entries or /entries.json
   def create
     @entry = Entry.new(entry_params)
-    @entry.library_id = current_faculty.library_id
-    @entry.member_id = params[:member_id]
 
     respond_to do |format|
       if @entry.save

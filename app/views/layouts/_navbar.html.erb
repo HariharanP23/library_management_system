@@ -1,39 +1,63 @@
 <% if faculty_signed_in? && current_faculty.staff? %>
-<body id="body-pd">
-<header class="header" id="header">
-  <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-  <div class="user_info">
-    Welcome, <%= current_faculty.first_name %>
-  </div>
-  <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
-</header>
-<div class="l-navbar" id="nav-bar">
-  <nav class="nav">
-    <div> <a href="/members" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">BBBootstrap</span> </a>
-      <div class="nav_list">
-        <a href="/faculties/edit" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Change Password</span> </a>
-        <a href="/members" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Members</span> </a>
-        <a href="/members/library_entry" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Entry</span> </a>
-      </div>
-    </div> <a href='/faculties/sign_out' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cbdeec;">
+    <a class="navbar-brand" href="#">
+      <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="navbar-brand" href="/members">Member <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/members/library_entry">Entry</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/faculties/edit">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+        </li>
+      </ul>
+    </div>
   </nav>
-</div>
   <%elsif faculty_signed_in? && current_faculty.admin? %>
-  <body id="body-pd">
-  <header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-    <div class="header_img"> <img src="https://i.imgur.com/hczKIze.jpg" alt=""> </div>
-  </header>
-  <div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-      <div> <a href="/books" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">BBBootstrap</span> </a>
-        <div class="nav_list">
-          <a href="/faculties/edit" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Change Password</span> </a>
-          <a href="/staffs" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Members</span> </a>
-          <a href="/books" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Books</span> </a>
-          <a href="/categories" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Categories</span> </a>
-        </div>
-      </div> <a href='/faculties/sign_out' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-    </nav>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="navbar-brand" href="/categories">Category <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/books">Book</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/staffs">Staff</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/faculties/edit">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Edit Library', edit_library_path(current_faculty.library_id), class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <% end %>
