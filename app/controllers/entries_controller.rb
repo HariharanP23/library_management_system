@@ -9,8 +9,7 @@ class EntriesController < ApplicationController
   end
 
   def update_return_date
-    @entry.update!(return_date: Date.today)
-    @entry.update!(fine_amount: calculate(@entry))
+    @entry.update!(return_date: Date.today, fine_amount: calculate(@entry))
     redirect_to member_url(@member.id)
   end
 
@@ -77,9 +76,10 @@ class EntriesController < ApplicationController
 
   def calculate(entry)
     if entry.due_date.present?
+      fine = 0
       date_difference = Date.today - entry.due_date
-      fine_per_day = 10 # Adjust this value based on your requirements
-      fine = date_difference * fine_per_day
+      fine_per_day = 10
+      fine = date_difference * fine_per_day if date_difference > 0
       fine
     end
   end

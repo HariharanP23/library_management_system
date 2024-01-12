@@ -1,9 +1,10 @@
-<h1>New book</h1>
+<div class="row">
+  <div class="col">
+    <h2>New book</h2>
+  </div>
+  <div class="col">
+    <%= link_to "Back to books", books_path %>
+  </div>
+</div>
 
 <%= render "form", book: @book %>
-
-<br>
-
-<div>
-  <%= link_to "Back to books", books_path %>
-</div>

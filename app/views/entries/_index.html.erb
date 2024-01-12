@@ -35,7 +35,7 @@
           </td>
           <td><%= entry.fine_amount %></td>
           <td style="display: flex;justify-content: space-around;">
-            <%= link_to member_entry_path(member.id) do%>
+            <%= link_to member_entry_path(member.id, entry.id), data: { "turbo-method": :delete } do%>
               <i class="fa fa-trash" aria-hidden="true"></i>
             <% end %>
           </td>
@@ -58,7 +58,7 @@
       </div>
       <div class="modal-body">
         <%= form_with(model:[ @member, @entry ]) do |form| %>
-          <div>
+          <div class="form-item-select">
             <%= form.label :book_id, style: "display: block", class: "mandatory" %>
             <%= form.collection_select :book_id, Book.all , :id, :isbn %>
             <% if @entry.errors[:book_id].any? %>
