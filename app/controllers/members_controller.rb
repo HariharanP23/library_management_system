@@ -1,15 +1,20 @@
 class MembersController < ApplicationController
+  before_action :require_staff
   before_action :set_library
   before_action :set_member, only: %i[ show edit update destroy ]
 
   # GET /members or /members.json
   def index
     @members = @library.members.all
+    @q = @members.ransack(params[:q])
+    @pagy, @members = pagy(@q.result(distinct: true), items: 12)
   end
 
   # GET /members/1 or /members/1.json
   def show
     @entries = @member.entries.all
+    @q = @entries.ransack(params[:q])
+    @pagy, @entries = pagy(@q.result(distinct: true), items: 12)
     @entry = Entry.new
   end
 

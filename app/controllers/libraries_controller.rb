@@ -1,4 +1,5 @@
 class LibrariesController < ApplicationController
+  before_action :require_admin, except: %i[ new create ]
   skip_before_action :authenticate_faculty!, only: %i[ new create ]
   before_action :set_library, only: %i[ show edit update destroy ]
 

@@ -1,4 +1,6 @@
 <% if faculty_signed_in? && current_faculty.staff? %>
+  <% puts "cont name => #{controller_name}" %>
+  <% puts "action name => #{action_name}" %>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cbdeec;">
     <a class="navbar-brand" href="#">
       <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>

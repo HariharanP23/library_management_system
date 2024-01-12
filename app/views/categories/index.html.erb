@@ -1,13 +1,21 @@
-<div style="display: flex; justify-content: space-between;">
-  <h1 style="justify-content: right">Categories</h1>
-  <%= link_to "New category", new_category_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Categories</h1>
+
+  <div style="display: flex; margin: 0 auto;">
+    <%= search_form_for @q, class: "d-flex align-items-center" do |f| %>
+      <%= f.search_field :name_or_description_cont, placeholder: "Search", class: "form-control me-2" %>
+      <%= f.submit "Search", class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+
+  <%= link_to "New category", new_category_path, class: "btn", style: "padding: 15px 15px; color: blue; border-color: blue" %>
 </div>
 
 <table class="table table-striped">
   <thead>
   <tr>
-    <th style="width: 9%;">Name</th>
-    <th style="width: 9%;">Description</th>
+    <th style="width: 9%;"><%= sort_link(@q, :name, "Name", default_order: :desc) %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :description, "Description") %></th>
   </tr>
   </thead>
   <tbody>
@@ -23,3 +31,10 @@
   </div>
   </tbody>
 </table>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

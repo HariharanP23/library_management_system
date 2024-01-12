@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  before_action :require_staff
   before_action :set_library
   before_action :set_member
   before_action :set_entry, only: %i[ edit update destroy update_return_date ]

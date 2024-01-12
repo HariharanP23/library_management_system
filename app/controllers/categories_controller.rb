@@ -1,10 +1,13 @@
 class CategoriesController < ApplicationController
+  before_action :require_admin
   before_action :set_library
   before_action :set_category, only: %i[ show edit update destroy ]
 
   # GET /categories or /categories.json
   def index
     @categories = @library.categories.all
+    @q = @categories.ransack(params[:q])
+    @pagy, @categories = pagy(@q.result(distinct: true), items: 12)
   end
 
   # GET /categories/new

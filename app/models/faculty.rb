@@ -15,4 +15,13 @@ class Faculty < ApplicationRecord
   def staff?
     user_type == 'Staff'
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["library"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "dob", "doj", "email", "first_name", "id", "last_name", "library_id", "phone_no", "updated_at",
+     "user_type"]
+  end
 end

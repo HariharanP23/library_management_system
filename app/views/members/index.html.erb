@@ -3,16 +3,21 @@
   <%= link_to "New member", new_member_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
 </div>
 
+<%= search_form_for @q do |f| %>
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+  <%= f.submit %>
+<% end %>
 <table class="table table-striped", style="text-align: left;">
   <thead>
   <tr>
-    <th style="width: 9%;">Code</th>
-    <th style="width: 9%;">Name</th>
-    <th style="width: 9%;">Email</th>
-    <th style="width: 12%;">DOB</th>
-    <th style="width: 9%;">Phone No</th>
-    <th style="width: 9%;">Expired at</th>
-    <th style="width: 9%;">Amount</th>
+    <th style="width: 9%;"><%= sort_link(@q, :code, "Code", default_order: :desc) %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :name, "Name") %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :email, "Email") %></th>
+    <th style="width: 12%;"><%= sort_link(@q, :dob, "DOB") %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :phone_no, "Phone No") %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :expires_at, "Expired at") %></th>
+    <th style="width: 9%;"><%= sort_link(@q, :Amount, "Amount") %></th>
     <th style="width: 9%;">Action</th>
   </tr>
   </thead>
@@ -24,3 +29,9 @@
   </div>
   </tbody>
 </table>
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

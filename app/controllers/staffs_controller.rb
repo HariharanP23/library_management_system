@@ -1,8 +1,11 @@
 class StaffsController < ApplicationController
+  before_action :require_admin
   before_action :set_library
 
   def index
     @faculties = @library.faculties.all
+    @q = @faculties.ransack(params[:q])
+    @pagy, @faculties = pagy(@q.result(distinct: true), items: 12)
   end
 
   def new
