@@ -68,6 +68,8 @@ class MembersController < ApplicationController
 
   def library_entry
     @entries = @library.entries.all
+    @q = @entries.ransack(params[:q])
+    @pagy, @entries = pagy(@q.result(distinct: true), items: 12)
   end
 
   private
