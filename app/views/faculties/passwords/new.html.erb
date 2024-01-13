@@ -1,0 +1,24 @@
+<body class="login-background">
+
+<div class="overlay">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="con">
+      <header class="head-form">
+        <h2>Forgot your password?</h2>
+      </header>
+      <br>
+      <div class="field-set">
+        <%= render "faculties/shared/error_messages", resource: resource %>
+
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "@UserName" %>
+
+        <div class="actions">
+          <%= f.submit "Send me reset password instructions", class: "log-in" %>
+        </div>
+        <%= render "faculties/shared/links" %>
+
+      </div>
+    </div>
+  <% end %>
+</div>
+</body>

@@ -1,0 +1,26 @@
+<h1>New staff</h1>
+
+<%= form_tag(staffs_path) do |form| %>
+  <% if @staff.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@staff.errors.count, "error") %> prohibited this @faculty from being saved:</h2>
+
+      <ul>
+        <% @staff.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= email_field_tag :email,nil, autofocus: true, autocomplete: "email", placeholder: "@UserName" %>
+  </div>
+  <div class="field">
+    <%= label_tag :user_type %><br />
+    <%= select_tag :user_type, options_for_select(Constant.user_types) %>
+  </div>
+  <div>
+    <%= submit_tag %>
+  </div>
+<% end %>

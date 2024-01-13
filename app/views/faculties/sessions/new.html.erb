@@ -1,0 +1,30 @@
+<body class="login-background">
+
+<div class="overlay">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="con">
+      <header class="head-form">
+        <h2>Log In</h2>
+        <p>login here using your username and password</p>
+      </header>
+      <br>
+      <div class="field-set">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", placeholder: "@UserName" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-input", placeholder: "Password" %>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-input">
+            <%= f.check_box :remember_me, class: "checkbox" %>
+            <%= f.label :remember_me, class: "remember-label" %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Log in", class: "log-in" %>
+        </div>
+        <%= render "faculties/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</body>
