@@ -1,0 +1,87 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Entries</h1>
+  <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal", style="padding: 15px 15px; color:blue; border-color: blue">New entry</button>
+</div>
+<table class="table table-hover", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 15%;"><%= sort_link(@q, 'members.code', "Member code", default_order: :desc) %></th>
+    <th style="width: 15%;"><%= sort_link(@q, 'book.title', "Book") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :acquisition_date, "Start date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :due_date, "Due date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :return_date, "Return date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if entries.present? %>
+      <% entries.each do |entry| %>
+        <tr>
+          <td><%= entry.member.code %></td>
+          <td><%= entry.book.title %></td>
+          <td><%= entry.acquisition_date %></td>
+          <td><%= entry.due_date %><i class="fa fa-plus" aria-hidden="true"></i></td>
+          <td>
+            <% if entry.return_date.present? %>
+              <%= entry.return_date %>
+            <% else %>
+              <%= link_to "Update Return Date", update_return_date_member_entry_path(member.id, entry.id), method: :patch, data: { conform: 'Are you sure the book is returned'} %>
+            <% end %>
+          </td>
+          <td><%= entry.fine_amount %></td>
+          <td style="display: flex;justify-content: space-around;">
+            <%= link_to member_entry_path(member.id, entry.id), data: { "turbo-method": :delete } do%>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p> No entries available </p>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Entry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model:[ @member, @entry ]) do |form| %>
+          <div class="form-item-select">
+            <%= form.label :book_id, style: "display: block", class: "mandatory" %>
+            <%= form.collection_select :book_id, Book.all , :id, :isbn %>
+            <% if @entry.errors[:book_id].any? %>
+              <div style="color: red;"><%= @entry.errors[:name].first %></div>
+            <% end %>
+
+            <%= form.hidden_field :acquisition_date, value: Date.today %>
+            <%= form.hidden_field :due_date, value: Date.today+ 15.days %>
+            <%= form.hidden_field :member_id, value: @member.id %>
+            <%= form.hidden_field :library_id, value: current_faculty.library_id %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= form.submit class:"btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

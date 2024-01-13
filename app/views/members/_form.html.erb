@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <%= form_with(model: member) do |form| %>
+        <div class="field-set" style="width: 90%; box-sizing: border-box;">
+
+          <%= form.label :name, style: "display: block", class: "mandatory" %>
+          <%= form.text_field :name, autofocus: true, class: "form-input", placeholder: "UserName" %>
+          <% if member.errors[:name].any? %>
+            <div style="color: red;"><%= member.errors[:name].first %></div>
+          <% end %>
+
+          <%= form.label :dob, style: "display: block" %>
+          <%= form.date_field :dob , class: "form-input" %>
+
+          <%= form.label :location, style: "display: block" %>
+          <%= form.text_field :location, autocomplete: "current-password", class: "form-input", placeholder: "Erode" %>
+
+          <%= form.label :email, style: "display: block", class: "mandatory" %>
+          <%= form.text_field :email, class: "form-input", placeholder: "@UserName" %>
+          <% if member.errors[:email].any? %>
+            <div style="color: red;"><%= member.errors[:email].first %></div>
+          <% end %>
+
+          <%= form.label :expired_at, style: "display: block" %>
+          <%= form.date_field :expired_at, class: "form-input" %>
+
+          <%= form.label :amount, style: "display: block" %>
+          <%= form.number_field :amount, class: "form-input" %>
+
+          <div class="actions">
+            <%= form.submit class: "log-in" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <div class="field-set">
+        <%= image_tag 'login.jpg', alt: 'Example Image', class: "img-fluid" %>
+      </div>
+    </div>
+  </div>
+</div>

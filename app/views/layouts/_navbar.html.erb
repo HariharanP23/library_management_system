@@ -1,8 +1,65 @@
-<% if faculty_signed_in? %>
-  <%= button_to 'logout', destroy_faculty_session_path, method: :delete %>
-  <%= link_to "category", categories_path %>
-  <%= link_to "book", books_path %>
-  <%= link_to 'faculty', staffs_path %>
-<% else %>
-  <%= link_to "Log in", new_session_path(:faculty) %><br />
+<% if faculty_signed_in? && current_faculty.staff? %>
+  <% puts "cont name => #{controller_name}" %>
+  <% puts "action name => #{action_name}" %>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cbdeec;">
+    <a class="navbar-brand" href="#">
+      <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="navbar-brand" href="/members">Member <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/members/library_entry">Entry</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/faculties/edit">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <%elsif faculty_signed_in? && current_faculty.admin? %>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="navbar-brand" href="/categories">Category <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/books">Book</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/staffs">Staff</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-brand" href="/faculties/edit">Edit Profile</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Edit Library', edit_library_path(current_faculty.library_id), class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
+        </li>
+        <li class="nav-item">
+          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <% end %>

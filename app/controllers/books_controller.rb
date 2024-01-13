@@ -5,10 +5,8 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = @library.books.all
-  end
-
-  # GET /books/1 or /books/1.json
-  def show
+    @q = @books.ransack(params[:q])
+    @pagy, @books = pagy(@q.result(distinct: true), items: 12)
   end
 
   # GET /books/new

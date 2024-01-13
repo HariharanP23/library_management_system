@@ -1,0 +1,42 @@
+<h1>Entries</h1>
+<table class="table table-striped", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 10%;">Member</th>
+    <th style="width: 10%;">Code</th>
+    <th style="width: 15%;">Book title</th>
+    <th style="width: 15%;">ISBN</th>
+    <th style="width: 15%;">Start date</th>
+    <th style="width: 15%;">Due date</th>
+    <th style="width: 12%;">Return date</th>
+    <th style="width: 15%;">Fine amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if @entries.present? %>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.member.name %></td>
+          <td><%= entry.member.code %></td>
+          <td><%= entry.book.title %></td>
+          <td><%= entry.book.isbn %></td>
+          <td><%= entry.acquisition_date %></td>
+          <td><%= entry.due_date %></td>
+          <td><%= entry.return_date %></td>
+          <td><%= entry.fine_amount %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p> No entries available </p>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

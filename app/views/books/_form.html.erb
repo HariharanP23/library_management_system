@@ -1,67 +1,84 @@
-<%= form_with(model: book) do |form| %>
-  <% if book.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <%= form_with(model: book) do |form| %>
+        <div class="field-set" style="width: 90%; box-sizing: border-box;">
+          <div class="row">
+            <div class="col">
+              <%= form.label :title, style: "display: block" %>
+              <%= form.text_field :title, autofocus: true, class: "form-input", placeholder: "Book" %>
+              <% if book.errors[:title].any? %>
+                <div style="color: red;"><%= book.errors[:title].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :author, style: "display: block" %>
+              <%= form.text_field :author, class: "form-input" %>
+            </div>
+          </div>
 
-      <ul>
-        <% book.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :isbn, style: "display: block" %>
+              <%= form.text_field :isbn, class: "form-input" %>
+            </div>
+            <div class="col form-item-select">
+              <%= form.label :category_id, style: "display: block" %>
+              <%= form.collection_select :category_id, @library.categories.all, :id, :name %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :published_date, style: "display: block" %>
+              <%= form.date_field :published_date, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :copies_available, style: "display: block" %>
+              <%= form.number_field :copies_available, class: "form-input" %>
+              <%# if library.errors[:email].any? %>
+<!--                <div style="color: red;"><%#= library.errors[:email].first %></div>-->
+              <%# end %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :total_copies, style: "display: block" %>
+              <%= form.number_field :total_copies, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :row, style: "display: block" %>
+              <%= form.text_field :row, class: "form-input" %>
+            </div>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :price, style: "display: block" %>
+              <%= form.number_field :price, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :description, style: "display: block" %>
+              <%= form.text_area :description, class: "form-input" %>
+            </div>
+          </div>
+
+
+          <div class="actions">
+            <%= form.submit class: "log-in" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <div class="col-md-4">
+      <div class="field-set">
+        <%= image_tag 'login.jpg', alt: 'Example Image', class: "img-fluid" %>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :author, style: "display: block" %>
-    <%= form.text_field :author %>
-  </div>
-
-  <div>
-    <%= form.label :isbn, style: "display: block" %>
-    <%= form.text_field :isbn %>
-  </div>
-
-  <div>
-    <%= form.label :category_id, style: "display: block" %>
-    <%= form.collection_select :category_id, @library.categories.all, :id, :name %>
-  </div>
-
-  <div>
-    <%= form.label :published_date, style: "display: block" %>
-    <%= form.date_field :published_date %>
-  </div>
-
-  <div>
-    <%= form.label :copies_available, style: "display: block" %>
-    <%= form.number_field :copies_available %>
-  </div>
-
-  <div>
-    <%= form.label :total_copies, style: "display: block" %>
-    <%= form.number_field :total_copies %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div>
-    <%= form.label :row, style: "display: block" %>
-    <%= form.text_field :row %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

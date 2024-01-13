@@ -1,8 +1,11 @@
 class StaffsController < ApplicationController
+  before_action :require_admin
   before_action :set_library
 
   def index
     @faculties = @library.faculties.all
+    @q = @faculties.ransack(params[:q])
+    @pagy, @faculties = pagy(@q.result(distinct: true), items: 12)
   end
 
   def new
@@ -16,8 +19,8 @@ class StaffsController < ApplicationController
 
     respond_to do |format|
       if @staff.save
-        FacultyMailer.welcome_email(email).deliver_later
-        format.html { redirect_to faculties_path, notice: "faculty was successfully created." }
+        FacultyMailer.welcome_email(@staff.email).deliver_later
+        format.html { redirect_to staffs_path, notice: "faculty was successfully created." }
         format.json { render :index, status: :created, location: @staff }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -29,7 +32,7 @@ class StaffsController < ApplicationController
   private
 
   def faculty_params
-    params.require(:faculty).permit(:email, :user_type)
+    params.permit(:email, :user_type)
   end
 
   def set_library

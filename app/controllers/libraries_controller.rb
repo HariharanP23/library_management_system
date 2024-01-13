@@ -1,4 +1,5 @@
 class LibrariesController < ApplicationController
+  before_action :require_admin, except: %i[ new create ]
   skip_before_action :authenticate_faculty!, only: %i[ new create ]
   before_action :set_library, only: %i[ show edit update destroy ]
 
@@ -12,7 +13,7 @@ class LibrariesController < ApplicationController
     if faculty_signed_in? && current_faculty.admin?
       redirect_to books_path
     elsif faculty_signed_in? && current_faculty.staff?
-      redirect_to root_url
+      redirect_to members_path
     end
   end
 
@@ -21,7 +22,7 @@ class LibrariesController < ApplicationController
     if faculty_signed_in? && current_faculty.admin?
       redirect_to books_path
     elsif faculty_signed_in? && current_faculty.staff?
-      redirect_to root_url
+      redirect_to members_path
     end
     @library = Library.new
   end

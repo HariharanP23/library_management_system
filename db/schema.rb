@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_171118) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_08_072422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_171118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["library_id"], name: "index_categories_on_library_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.date "acquisition_date"
+    t.date "due_date"
+    t.date "return_date"
+    t.integer "fine_amount"
+    t.bigint "member_id", null: false
+    t.bigint "library_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_entries_on_book_id"
+    t.index ["library_id"], name: "index_entries_on_library_id"
+    t.index ["member_id"], name: "index_entries_on_member_id"
   end
 
   create_table "faculties", force: :cascade do |t|
@@ -73,8 +88,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_171118) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "members", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "email"
+    t.date "dob"
+    t.string "phone_no"
+    t.date "expired_at"
+    t.integer "amount"
+    t.bigint "library_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["library_id"], name: "index_members_on_library_id"
+  end
+
   add_foreign_key "books", "categories"
   add_foreign_key "books", "libraries"
   add_foreign_key "categories", "libraries"
+  add_foreign_key "entries", "books"
+  add_foreign_key "entries", "libraries"
+  add_foreign_key "entries", "members"
   add_foreign_key "faculties", "libraries"
+  add_foreign_key "members", "libraries"
 end
