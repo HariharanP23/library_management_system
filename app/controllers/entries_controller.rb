@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
 
   def update_return_date
     @entry.update!(return_date: Date.today, fine_amount: calculate(@entry))
-    redirect_to member_url(@member.id)
+    redirect_to user_url(@member.id)
   end
 
   # GET /entries/1/edit
@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to member_url(@member.id), notice: "Entry was successfully created." }
+        format.html { redirect_to user_path(@member.id), notice: "Entry was successfully created." }
         format.json { render :show, status: :created, location: @entry }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class EntriesController < ApplicationController
     @entry.destroy!
 
     respond_to do |format|
-      format.html { redirect_to member_url(@member.id), notice: "Entry was successfully destroyed." }
+      format.html { redirect_to user_url(@member.id), notice: "Entry was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,7 +63,7 @@ class EntriesController < ApplicationController
   end
 
   def set_member
-    @member = Member.find(params[:member_id])
+    @member = Member.find(params[:user_id])
   end
 
     def set_entry
@@ -72,7 +72,7 @@ class EntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def entry_params
-      params.require(:entry).permit(:book_id, :acquisition_date, :due_date, :return_date, :fine_amount, :member_id, :library_id)
+      params.require(:entry).permit(:book_id, :start_date, :due_date, :return_date, :fine_amount, :member_id, :library_id)
     end
 
   def calculate(entry)

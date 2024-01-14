@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
-  resources :members do
+  devise_for :members, controllers: {
+    sessions: 'members/sessions',
+    registrations: 'members/registrations',
+    passwords: 'members/passwords'
+  }
+  resources :users do
     get :library_entry, on: :collection
     resources :entries do
       get :update_return_date, on: :member
     end
   end
   resources :books
+  get 'login_members/entries', to: 'login_members#entries'
+  get 'login_members/books', to: 'login_members#books'
   resources :categories
   devise_for :faculties, controllers: {
     sessions: 'faculties/sessions',

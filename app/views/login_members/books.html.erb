@@ -1,0 +1,40 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Books</h1>
+
+  <div style="display: flex; margin: 0 auto;">
+    <%= search_form_for @q, class: "d-flex align-items-center" do |f| %>
+      <%= f.search_field :title_cont, placeholder: "Search", class: "form-control me-2" %>
+      <%= f.submit "Search", class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+</div>
+
+<table class="table table-striped", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 10%;"><%= sort_link(@q, :isbn, "ISBN", default_order: :desc) %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :title, "Title") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :author, "Author") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :published_date, "Published Date") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :copies_available, "Copies") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :total_copies, "Total Copies") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :category.name, "Category") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :price, "Price") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :row, "row") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="users">
+    <% @books.each do |book| %>
+      <%= render book %>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

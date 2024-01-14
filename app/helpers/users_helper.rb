@@ -1,3 +1,3 @@
-module MembersHelper
+module UsersHelper
   include Pagy::Frontend
 end
