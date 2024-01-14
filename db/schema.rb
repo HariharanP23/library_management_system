@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_08_072422) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_110700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_072422) do
 
   create_table "entries", force: :cascade do |t|
     t.bigint "book_id", null: false
-    t.date "acquisition_date"
+    t.date "start_date"
     t.date "due_date"
     t.date "return_date"
     t.integer "fine_amount"
@@ -89,17 +89,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_072422) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "name"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "code"
-    t.string "email"
     t.date "dob"
     t.string "phone_no"
     t.date "expired_at"
     t.integer "amount"
     t.bigint "library_id", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["library_id"], name: "index_members_on_library_id"
+    t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
   add_foreign_key "books", "categories"

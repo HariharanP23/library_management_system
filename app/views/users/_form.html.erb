@@ -1,14 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <%= form_with(model: member) do |form| %>
+      <%= form_with(model: member, url: member.present? ? user_path(member) : user_path) do |form| %>
         <div class="field-set" style="width: 90%; box-sizing: border-box;">
 
-          <%= form.label :name, style: "display: block", class: "mandatory" %>
-          <%= form.text_field :name, autofocus: true, class: "form-input", placeholder: "UserName" %>
-          <% if member.errors[:name].any? %>
-            <div style="color: red;"><%= member.errors[:name].first %></div>
+          <%= form.label :first_name, style: "display: block", class: "mandatory" %>
+          <%= form.text_field :first_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
+          <% if member.errors[:first_name].any? %>
+            <div style="color: red;"><%= member.errors[:first_name].first %></div>
           <% end %>
+
+          <%= form.label :last_name, style: "display: block" %>
+          <%= form.text_field :last_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
 
           <%= form.label :dob, style: "display: block" %>
           <%= form.date_field :dob , class: "form-input" %>

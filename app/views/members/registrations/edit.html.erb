@@ -1,0 +1,97 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= link_to "Back", :back %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
+        <%#= render "members/shared/error_messages", resource: resource %>
+        <div class="field-set" style="width: 90%; box-sizing: border-box;">
+          <div class="row">
+            <div class="col">
+              <%= form.label :email, style: "display: block", class: "mandatory" %>
+              <%= form.email_field :email, autofocus: true, class: "form-input", placeholder: "@UserName" %>
+              <% if resource.errors[:eamil].any? %>
+                <div style="color: red;"><%= resource.errors[:name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :password, style: "display: block" %> <i>(leave blank if you don't want to change it)</i><br />
+              <%= form.password_field :password, autocomplete: "new-password", class: "form-input" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :current_password, style: "display: block", class: "mandatory" %><i>(we need your current password to confirm your changes)</i><br />
+              <%= form.text_field :current_password, class: "form-input", autocomplete: "current-password", placeholder: "User" %>
+              <% if resource.errors[:first_name].any? %>
+                <div style="color: red;"><%= resource.errors[:first_name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :password_confirmation, style: "display: block" %>
+              <%= form.text_field :password_confirmation, class: "form-input", placeholder: "User", autocomplete: "new-password" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :first_name, style: "display: block", class: "mandatory" %>
+              <%= form.text_field :first_name, class: "form-input", placeholder: "User" %>
+              <% if resource.errors[:first_name].any? %>
+                <div style="color: red;"><%= resource.errors[:first_name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :last_name, style: "display: block" %>
+              <%= form.text_field :last_name, class: "form-input", placeholder: "User" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :dob, style: "display: block" %>
+              <%= form.date_field :dob, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :expired_at, style: "display: block" %>
+              <%= form.date_field :expired_at, class: "form-input" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= form.label :phone_no, style: "display: block" %>
+              <%= form.text_field :phone_no, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :amount, style: "display: block" %>
+              <%= form.number_field :amount, class: "form-input" %>
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= form.submit class: "log-in" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <div class="field-set">
+        <%= image_tag 'login.jpg', alt: 'Example Image', class: "img-fluid" %>
+      </div>
+      <div>
+        <h3>Cancel my account</h3>
+
+        <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
+      </div>
+    </div>
+  </div>
+</div>

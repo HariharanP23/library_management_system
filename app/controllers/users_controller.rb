@@ -1,7 +1,7 @@
-class MembersController < ApplicationController
+class UsersController < ApplicationController
   before_action :require_staff
   before_action :set_library
-  before_action :set_member, only: %i[ show edit update destroy ]
+  before_action :set_member, only: %i[ show edit update ]
 
   # GET /members or /members.json
   def index
@@ -31,10 +31,10 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(member_params)
     @member.library_id = current_faculty.library_id
-
+    @member.password = '123456'
     respond_to do |format|
       if @member.save
-        format.html { redirect_to member_url(@member), notice: "Member was successfully created." }
+        format.html { redirect_to user_url(@member), notice: "Member was successfully created." }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
+        format.html { redirect_to user_url(@member), notice: "Member was successfully updated." }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,14 +57,14 @@ class MembersController < ApplicationController
   end
 
   # DELETE /members/1 or /members/1.json
-  def destroy
-    @member.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @member.destroy!
+  #
+  #   respond_to do |format|
+  #     format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   def library_entry
     @entries = @library.entries.all
@@ -84,6 +84,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:name, :code, :email, :dob, :phone_no, :expired_at, :amount, :library_id)
+      params.require(:member).permit(:first_name, :last_name, :code, :email, :dob, :phone_no, :expired_at, :amount, :library_id)
     end
 end

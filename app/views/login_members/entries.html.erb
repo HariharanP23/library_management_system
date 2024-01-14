@@ -1,0 +1,42 @@
+<%#= render partial: 'entries/index',locals: { entries: @entries, member: ''}  %>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Entries</h1>
+</div>
+<table class="table table-hover", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 15%;"><%= sort_link(@q, 'members.code', "Member code", default_order: :desc) %></th>
+    <th style="width: 15%;"><%= sort_link(@q, 'book.title', "Book") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :acquisition_date, "Start date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :due_date, "Due date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :return_date, "Return date") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if @entries.present? %>
+      <% @entries.each do |entry| %>
+        <tr>
+          <td><%= entry.member.code %></td>
+          <td><%= entry.book.title %></td>
+          <td><%= entry.start_date %></td>
+          <td><%= entry.due_date %><i class="fa fa-plus" aria-hidden="true"></i></td>
+          <td><%= entry.return_date %></td>
+          <td><%= entry.fine_amount %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p> No entries available </p>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>

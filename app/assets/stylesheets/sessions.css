@@ -63,7 +63,7 @@ header p {letter-spacing: 0.05em;}
     margin-bottom: 10px;
     box-sizing: border-box;
 }
-form#new_faculty, #edit_faculty {
+form#new_faculty, #edit_faculty, #new_member, #edit_member {
     height: auto;
     border-radius: 5px;
     margin: 2% auto;

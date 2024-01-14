@@ -21,18 +21,18 @@
         <tr>
           <td><%= entry.member.code %></td>
           <td><%= entry.book.title %></td>
-          <td><%= entry.acquisition_date %></td>
+          <td><%= entry.start_date %></td>
           <td><%= entry.due_date %><i class="fa fa-plus" aria-hidden="true"></i></td>
           <td>
             <% if entry.return_date.present? %>
               <%= entry.return_date %>
             <% else %>
-              <%= link_to "Update Return Date", update_return_date_member_entry_path(member.id, entry.id), method: :patch, data: { conform: 'Are you sure the book is returned'} %>
+              <%= link_to "Update Return Date", update_return_date_user_entry_path(member.id, entry.id), method: :patch, data: { conform: 'Are you sure the book is returned'} if current_faculty.present? %>
             <% end %>
           </td>
           <td><%= entry.fine_amount %></td>
           <td style="display: flex;justify-content: space-around;">
-            <%= link_to member_entry_path(member.id, entry.id), data: { "turbo-method": :delete } do%>
+            <%= link_to user_entry_path(member.id, entry.id), data: { "turbo-method": :delete } do%>
               <i class="fa fa-trash" aria-hidden="true"></i>
             <% end %>
           </td>
@@ -56,7 +56,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with(model:[ @member, @entry ]) do |form| %>
+        <%= form_with(model:[ @member, @entry ], url: user_entries_path(@member, @entry)) do |form| %>
           <div class="form-item-select">
             <%= form.label :book_id, style: "display: block", class: "mandatory" %>
             <%= form.collection_select :book_id, Book.all , :id, :isbn %>
@@ -64,7 +64,7 @@
               <div style="color: red;"><%= @entry.errors[:name].first %></div>
             <% end %>
 
-            <%= form.hidden_field :acquisition_date, value: Date.today %>
+            <%= form.hidden_field :start_date, value: Date.today %>
             <%= form.hidden_field :due_date, value: Date.today+ 15.days %>
             <%= form.hidden_field :member_id, value: @member.id %>
             <%= form.hidden_field :library_id, value: current_faculty.library_id %>
