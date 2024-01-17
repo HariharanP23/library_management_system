@@ -17,18 +17,20 @@
     <% if @entries.present? %>
       <% @entries.each do |entry| %>
         <tr>
-          <td><%= entry.member.name %></td>
+          <td><%= entry.member.first_name %></td>
           <td><%= entry.member.code %></td>
           <td><%= entry.book.title %></td>
           <td><%= entry.book.isbn %></td>
-          <td><%= entry.acquisition_date %></td>
+          <td><%= entry.start_date %></td>
           <td><%= entry.due_date %></td>
           <td><%= entry.return_date %></td>
           <td><%= entry.fine_amount %></td>
         </tr>
       <% end %>
     <% else %>
-      <p> No entries available </p>
+      <tr>
+        <td class="text-center" colspan="8"> No entries available </td>
+      </tr>
     <% end %>
   </div>
   </tbody>

@@ -1,0 +1,31 @@
+<%= form_with(model: [@member, issue], url:user_issues_path) do |form| %>
+  <% if issue.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+      <ul>
+        <% issue.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :book_copy_id, style: "display: block" %>
+    <%= form.collection_select :book_copy_id, BookCopy.all , :id, :book_copy_no %>
+  </div>
+
+  <div>
+    <%= form.label :fine, style: "display: block" %>
+    <%= form.text_field :fine %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

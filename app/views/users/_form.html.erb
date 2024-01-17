@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <%= form_with(model: member, url: member.present? ? user_path(member) : user_path) do |form| %>
+      <%= form_with(model: member, url: member.id.present? ? user_path(member.id) : users_path) do |form| %>
         <div class="field-set" style="width: 90%; box-sizing: border-box;">
 
           <%= form.label :first_name, style: "display: block", class: "mandatory" %>

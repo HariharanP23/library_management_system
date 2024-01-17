@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_110700) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_15_104431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_copies", force: :cascade do |t|
+    t.string "book_copy_no"
+    t.bigint "book_id", null: false
+    t.bigint "library_id", null: false
+    t.boolean "hidden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_copies_on_book_id"
+    t.index ["library_id"], name: "index_book_copies_on_library_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -76,6 +87,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_110700) do
     t.index ["reset_password_token"], name: "index_faculties_on_reset_password_token", unique: true
   end
 
+  create_table "issues", force: :cascade do |t|
+    t.bigint "book_copy_id", null: false
+    t.bigint "member_id", null: false
+    t.bigint "library_id", null: false
+    t.string "fine"
+    t.string "description"
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_copy_id"], name: "index_issues_on_book_copy_id"
+    t.index ["book_id"], name: "index_issues_on_book_id"
+    t.index ["library_id"], name: "index_issues_on_library_id"
+    t.index ["member_id"], name: "index_issues_on_member_id"
+  end
+
   create_table "libraries", force: :cascade do |t|
     t.string "library_id"
     t.string "name"
@@ -109,6 +135,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_110700) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "book_copies", "books"
+  add_foreign_key "book_copies", "libraries"
   add_foreign_key "books", "categories"
   add_foreign_key "books", "libraries"
   add_foreign_key "categories", "libraries"
@@ -116,5 +144,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_110700) do
   add_foreign_key "entries", "libraries"
   add_foreign_key "entries", "members"
   add_foreign_key "faculties", "libraries"
+  add_foreign_key "issues", "book_copies"
+  add_foreign_key "issues", "books"
+  add_foreign_key "issues", "libraries"
+  add_foreign_key "issues", "members"
   add_foreign_key "members", "libraries"
 end

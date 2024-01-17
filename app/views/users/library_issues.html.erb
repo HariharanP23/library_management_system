@@ -1,0 +1,42 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Issues</h1>
+</div>
+
+<table class="table table-hover", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 15%;"><%= sort_link(@q, 'members.code', "Member code", default_order: :desc) %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :'book_copy.book_copy_no', "book code") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, 'book.title', "Book") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :description, "description") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if @issues.present? %>
+      <% @issues.each do |issue| %>
+        <tr>
+          <td><%= issue.member.code %></td>
+          <td><%= issue.book_copy.book_copy_no %></td>
+          <td><%= issue.book.title %></td>
+          <td><%= issue.description %></td>
+          <td><%= issue.fine %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td class="text-center" colspan="6"> No issues available </td>
+      </tr>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>
+
