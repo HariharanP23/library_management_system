@@ -6,6 +6,7 @@ class Member < ApplicationRecord
   # association
   belongs_to :library
   has_many :entries
+  has_many :issues
   # callback
   after_create :update_code
   # validation

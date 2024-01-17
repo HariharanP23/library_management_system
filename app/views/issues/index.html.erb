@@ -1,0 +1,90 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1 style="margin: 0;">Entries</h1>
+  <%= link_to "Issues", user_issues_path(@member.id) %>
+  <button type="button" class="btn" data-toggle="modal" data-target="#example1Modal", style="padding: 15px 15px; color:blue; border-color: blue">New issue</button>
+</div>
+
+<table class="table table-hover", style="text-align: left;">
+  <thead>
+  <tr>
+    <th style="width: 15%;"><%= sort_link(@q, 'members.code', "Member code", default_order: :desc) %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :'book_copy.book_copy_no', "book code") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, 'book.title', "Book") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :description, "description") %></th>
+    <th style="width: 15%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <div id="entries">
+    <% if @issues.present? %>
+      <% @issues.each do |issue| %>
+        <tr>
+          <td><%= issue.member.code %></td>
+          <td><%= issue.book_copy.book_copy_no %></td>
+          <td><%= issue.book.title %></td>
+          <td><%= issue.description %></td>
+          <td><%= issue.fine %></td>
+          <td><%= link_to 'Delete', user_issues_path(@member.id, issue.id) %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p> No entries available </p>
+    <% end %>
+  </div>
+  </tbody>
+</table>
+
+<%if @pagy.pages > 1 %>
+  <div class="row">
+    <div class="col"><%== pagy_info(@pagy) %></div>
+    <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
+  </div>
+<% end %>
+
+<div class="modal fade" id="example1Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Entry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: [@member, @issue], url:user_issues_path) do |form| %>
+          <% if @issue.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+              <ul>
+                <% @issue.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div>
+            <%= form.label :book_copy_id, style: "display: block" %>
+            <%= form.collection_select :book_copy_id, BookCopy.all , :id, :book_copy_no %>
+          </div>
+
+          <div>
+            <%= form.label :fine, style: "display: block" %>
+            <%= form.text_field :fine %>
+          </div>
+
+          <div>
+            <%= form.label :description, style: "display: block" %>
+            <%= form.text_field :description %>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= form.submit class:"btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

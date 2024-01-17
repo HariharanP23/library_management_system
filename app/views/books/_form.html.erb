@@ -5,27 +5,36 @@
         <div class="field-set" style="width: 90%; box-sizing: border-box;">
           <div class="row">
             <div class="col">
-              <%= form.label :title, style: "display: block" %>
+              <%= form.label :title, style: "display: block", class: "mandatory" %>
               <%= form.text_field :title, autofocus: true, class: "form-input", placeholder: "Book" %>
               <% if book.errors[:title].any? %>
                 <div style="color: red;"><%= book.errors[:title].first %></div>
               <% end %>
             </div>
             <div class="col">
-              <%= form.label :author, style: "display: block" %>
+              <%= form.label :author, style: "display: block", class: "mandatory" %>
               <%= form.text_field :author, class: "form-input" %>
+              <% if book.errors[:author].any? %>
+                <div style="color: red;"><%= book.errors[:author].first %></div>
+              <% end %>
             </div>
           </div>
 
 
           <div class="row">
             <div class="col">
-              <%= form.label :isbn, style: "display: block" %>
+              <%= form.label :isbn, style: "display: block", class: "mandatory" %>
               <%= form.text_field :isbn, class: "form-input" %>
+              <% if book.errors[:isbn].any? %>
+                <div style="color: red;"><%= book.errors[:isbn].first %></div>
+              <% end %>
             </div>
             <div class="col form-item-select">
-              <%= form.label :category_id, style: "display: block" %>
+              <%= form.label :category_id, style: "display: block", class: "mandatory" %>
               <%= form.collection_select :category_id, @library.categories.all, :id, :name %>
+              <% if book.errors[:category_id].any? %>
+                <div style="color: red;"><%= book.errors[:category_id].first %></div>
+              <% end %>
             </div>
           </div>
 
@@ -37,16 +46,16 @@
             <div class="col">
               <%= form.label :copies_available, style: "display: block" %>
               <%= form.number_field :copies_available, class: "form-input" %>
-              <%# if library.errors[:email].any? %>
-<!--                <div style="color: red;"><%#= library.errors[:email].first %></div>-->
-              <%# end %>
             </div>
           </div>
 
           <div class="row">
             <div class="col">
-              <%= form.label :total_copies, style: "display: block" %>
+              <%= form.label :total_copies, style: "display: block", class: "mandatory" %>
               <%= form.number_field :total_copies, class: "form-input" %>
+              <% if book.errors[:total_copies].any? %>
+                <div style="color: red;"><%= book.errors[:total_copies].first %></div>
+              <% end %>
             </div>
             <div class="col">
               <%= form.label :row, style: "display: block" %>
@@ -54,20 +63,20 @@
             </div>
           </div>
 
-
-
-
           <div class="row">
             <div class="col">
-              <%= form.label :price, style: "display: block" %>
+              <%= form.label :price, style: "display: block", class: "mandatory" %>
               <%= form.number_field :price, class: "form-input" %>
+              <% if book.errors[:price].any? %>
+                <div style="color: red;"><%= book.errors[:price].first %></div>
+              <% end %>
             </div>
             <div class="col">
               <%= form.label :description, style: "display: block" %>
               <%= form.text_area :description, class: "form-input" %>
             </div>
           </div>
-
+          <%= form.hidden_field :library_id, value: current_faculty.library_id %>
 
           <div class="actions">
             <%= form.submit class: "log-in" %>

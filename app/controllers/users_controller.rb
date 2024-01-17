@@ -72,6 +72,12 @@ class UsersController < ApplicationController
     @pagy, @entries = pagy(@q.result(distinct: true), items: 12)
   end
 
+  def library_issues
+    @issues = @library.issues.all
+    @q = @issues.ransack(params[:q])
+    @pagy, @issues = pagy(@q.result(distinct: true), items: 12)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_library

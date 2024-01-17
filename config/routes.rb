@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   }
   resources :users do
     get :library_entry, on: :collection
+    get :library_issues, on: :collection
     resources :entries do
       get :update_return_date, on: :member
     end
+    resources :issues
   end
   resources :books
   get 'login_members/entries', to: 'login_members#entries'

@@ -2,6 +2,8 @@ class Library < ApplicationRecord
   has_many :faculties
   has_many :categories
   has_many :books
+  has_many :book_copies
+  has_many :issues
   has_many :members
   has_many :entries
   after_create :update_bibrary_id

@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :require_admin, except: %i[ index ]
   before_action :set_library
   before_action :set_book, only: %i[ show edit update destroy ]
 
@@ -7,6 +8,13 @@ class BooksController < ApplicationController
     @books = @library.books.all
     @q = @books.ransack(params[:q])
     @pagy, @books = pagy(@q.result(distinct: true), items: 12)
+  end
+
+  def show
+    @book_copies = @book.book_copies.all
+    @issues = @book.issues.all
+    @q = @book_copies.ransack(params[:q])
+    @pagy, @book_copies = pagy(@q.result(distinct: true), items: 12)
   end
 
   # GET /books/new
@@ -21,7 +29,6 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = @library.books.new(book_params)
-    @book.library_id = current_faculty.library_id
 
     respond_to do |format|
       if @book.save

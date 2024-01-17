@@ -9,11 +9,11 @@
     <td><%= book.category.name %></td>
     <td><%= book.price %></td>
     <td><%= book.row %></td>
-    <% if current_faculty.present? %>
+    <% if current_faculty.present? && current_faculty.admin? %>
       <td style="display: flex;justify-content: space-around;">
-        <%#= link_to  book do %>
-        <!--        <i class="fa fa-eye" aria-hidden="true"></i>-->
-        <%# end %>
+        <%= link_to  book do %>
+                <i class="fa fa-eye" aria-hidden="true"></i>
+        <% end %>
         <%= link_to edit_book_path(book) do %>
           <i class="fa fa-edit" style="font-size: 22px;"></i>
         <% end %>

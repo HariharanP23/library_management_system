@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book_copy: one
+  member: one
+  library: one
+  fine: MyString
+  description: MyString
+  book: one
+
+two:
+  book_copy: two
+  member: two
+  library: two
+  fine: MyString
+  description: MyString
+  book: two

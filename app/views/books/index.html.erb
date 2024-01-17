@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <%= link_to "New book", new_book_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
+  <%= link_to "New book", new_book_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" if current_faculty.admin? %>
 </div>
 
 <table class="table table-striped", style="text-align: left;">
@@ -23,7 +23,9 @@
     <th style="width: 10%;"><%= sort_link(@q, :category.name, "Category") %></th>
     <th style="width: 10%;"><%= sort_link(@q, :price, "Price") %></th>
     <th style="width: 10%;"><%= sort_link(@q, :row, "row") %></th>
+    <%if current_faculty.admin? %>
     <th style="width: 10%;">Action</th>
+      <%end %>
   </tr>
   </thead>
   <tbody>

@@ -1,13 +1,14 @@
 <div style="display: flex; justify-content: space-between;">
   <h1 style="justify-content: right">Members</h1>
+  <div style="display: flex; margin: 0 auto;">
+    <%= search_form_for @q, url: users_path, class: "d-flex align-items-center" do |f| %>
+      <%= f.search_field :name_cont, placeholder: "Search", class: "form-control me-2" %>
+      <%= f.submit "Search", class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
   <%= link_to "New member", new_user_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
 </div>
 
-<%= search_form_for @q, url: users_path do |f| %>
-  <%= f.label :name_cont %>
-  <%= f.search_field :name_cont %>
-  <%= f.submit %>
-<% end %>
 <table class="table table-striped", style="text-align: left;">
   <thead>
   <tr>
