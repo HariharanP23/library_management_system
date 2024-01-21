@@ -41,6 +41,10 @@
               <%= form.time_field :opening_hours_end, class: "form-input" %>
             </div>
           </div>
+          <div class="field">
+            <%= form.label :logo, "User Avatar", class:"form-label" %>
+            <%= form.file_field :logo, accept: 'image/png,image/gif,image/jpeg,image/jfif', class:"form-control form-input form-control-sm", id:"formFileSm" %>
+          </div>
 
           <div class="actions">
             <%= form.submit class: "log-in" %>

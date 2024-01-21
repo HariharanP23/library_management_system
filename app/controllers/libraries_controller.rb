@@ -3,11 +3,6 @@ class LibrariesController < ApplicationController
   skip_before_action :authenticate_faculty!, only: %i[ new create ]
   before_action :set_library, only: %i[ show edit update destroy ]
 
-  # GET /libraries or /libraries.json
-  # def index
-  #   @libraries = Library.all
-  # end
-
   # GET /libraries/1 or /libraries/1.json
   def show
     if faculty_signed_in? && current_faculty.admin?
@@ -77,6 +72,6 @@ class LibrariesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def library_params
-      params.require(:library).permit(:library_id, :name, :location, :established_date, :opening_hours_start, :opening_hours_end, :email)
+      params.require(:library).permit(:library_id, :name, :logo, :location, :established_date, :opening_hours_start, :opening_hours_end, :email)
     end
 end

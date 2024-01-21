@@ -1,35 +1,60 @@
-<div class="container">
+<div class="container", style="margin-top: 20px;">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
       <%= form_with(model: member, url: member.id.present? ? user_path(member.id) : users_path) do |form| %>
         <div class="field-set" style="width: 90%; box-sizing: border-box;">
+          <div class="row">
+            <div class="col">
+              <%= form.label :first_name, style: "display: block", class: "mandatory" %>
+              <%= form.text_field :first_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
+              <% if member.errors[:first_name].any? %>
+                <div style="color: red;"><%= member.errors[:first_name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :last_name, style: "display: block" %>
+              <%= form.text_field :last_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
+            </div>
+          </div>
 
-          <%= form.label :first_name, style: "display: block", class: "mandatory" %>
-          <%= form.text_field :first_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
-          <% if member.errors[:first_name].any? %>
-            <div style="color: red;"><%= member.errors[:first_name].first %></div>
-          <% end %>
 
-          <%= form.label :last_name, style: "display: block" %>
-          <%= form.text_field :last_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
+          <div class="row">
+            <div class="col">
+              <%= form.label :dob, style: "display: block" %>
+              <%= form.date_field :dob , class: "form-input" %>
+            </div>
+            <div class="col form-item-select">
+              <%= form.label :location, style: "display: block" %>
+              <%= form.text_field :location, autocomplete: "current-password", class: "form-input", placeholder: "Erode" %>
+            </div>
+          </div>
 
-          <%= form.label :dob, style: "display: block" %>
-          <%= form.date_field :dob , class: "form-input" %>
+          <div class="row">
+            <div class="col">
+              <%= form.label :email, style: "display: block", class: "mandatory" %>
+              <%= form.text_field :email, class: "form-input", placeholder: "@UserName" %>
+              <% if member.errors[:email].any? %>
+                <div style="color: red;"><%= member.errors[:email].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :expired_at, style: "display: block" %>
+              <%= form.date_field :expired_at, class: "form-input" %>
+            </div>
+          </div>
 
-          <%= form.label :location, style: "display: block" %>
-          <%= form.text_field :location, autocomplete: "current-password", class: "form-input", placeholder: "Erode" %>
+          <div class="row">
+            <div class="col">
+              <%= form.label :amount, style: "display: block" %>
+              <%= form.number_field :amount, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :logo, "User Avatar", class:"form-label" %>
+              <%= form.file_field :logo, accept: 'image/png,image/gif,image/jpeg,image/jfif', class:"form-control form-input form-control-sm", id:"formFileSm" %>
+            </div>
+          </div>
 
-          <%= form.label :email, style: "display: block", class: "mandatory" %>
-          <%= form.text_field :email, class: "form-input", placeholder: "@UserName" %>
-          <% if member.errors[:email].any? %>
-            <div style="color: red;"><%= member.errors[:email].first %></div>
-          <% end %>
-
-          <%= form.label :expired_at, style: "display: block" %>
-          <%= form.date_field :expired_at, class: "form-input" %>
-
-          <%= form.label :amount, style: "display: block" %>
-          <%= form.number_field :amount, class: "form-input" %>
+          <%= form.hidden_field :library_id, value: current_faculty.library_id %>
 
           <div class="actions">
             <%= form.submit class: "log-in" %>

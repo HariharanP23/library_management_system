@@ -6,6 +6,9 @@ class Library < ApplicationRecord
   has_many :issues
   has_many :members
   has_many :entries
+  has_one_attached :logo
+
+  # callback
   after_create :update_bibrary_id
 
   # validation

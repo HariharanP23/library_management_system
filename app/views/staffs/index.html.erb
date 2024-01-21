@@ -8,7 +8,7 @@
     <% end %>
   </div>
 
-  <%= link_to "New staff", new_staff_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
+  <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal", style="padding: 15px 15px; color:blue; border-color: blue">New staff</button>
 </div>
 
 <table class="table table-striped", style="text-align: left;">
@@ -46,3 +46,34 @@
     <div class="col" style="display: flex; justify-content: right"><%== pagy_bootstrap_combo_nav_js(@pagy) %></div>
   </div>
 <% end %>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Entry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(staffs_path) do |form| %>
+          <div class="form-item-select">
+            <%= label_tag :email, "Email", class: "mandatory" %>
+            <%= email_field_tag :email,nil, autofocus: true, autocomplete: "email", placeholder: "@UserName", class: "form-input"%>
+            <% if @staff.errors.present? && @staff.errors[:email].any? %>
+              <div style="color: red;"><%= @staff.errors[:email].first %></div>
+            <% end %>
+
+            <%= label_tag :user_type %>
+            <%= select_tag :user_type, options_for_select(Constant.user_types), class: "form-input" %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= submit_tag %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

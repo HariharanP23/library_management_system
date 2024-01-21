@@ -4,6 +4,7 @@ class Faculty < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :library
+  has_one_attached :avatar
 
   # validations
   validates :email, uniqueness: true, presence: true

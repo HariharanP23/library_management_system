@@ -6,9 +6,6 @@ class StaffsController < ApplicationController
     @faculties = @library.faculties.all
     @q = @faculties.ransack(params[:q])
     @pagy, @faculties = pagy(@q.result(distinct: true), items: 12)
-  end
-
-  def new
     @staff = Faculty.new
   end
 
@@ -23,7 +20,7 @@ class StaffsController < ApplicationController
         format.html { redirect_to staffs_path, notice: "faculty was successfully created." }
         format.json { render :index, status: :created, location: @staff }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to staffs_path, notice: "Email not is already take." }
         format.json { render json: @staff.errors, status: :unprocessable_entity }
       end
     end

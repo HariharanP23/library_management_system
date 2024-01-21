@@ -30,7 +30,6 @@ class UsersController < ApplicationController
   # POST /members or /members.json
   def create
     @member = Member.new(member_params)
-    @member.library_id = current_faculty.library_id
     @member.password = '123456'
     respond_to do |format|
       if @member.save
@@ -90,6 +89,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:first_name, :last_name, :code, :email, :dob, :phone_no, :expired_at, :amount, :library_id)
+      params.require(:member).permit(:profile, :first_name, :last_name, :code, :email, :dob, :phone_no, :expired_at, :amount, :library_id)
     end
 end

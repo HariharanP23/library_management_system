@@ -9,7 +9,8 @@
   </tr>
   </thead>
   <tbody>
-    <div id="users">
+  <div id="users">
+    <% if @book_copies.present? %>
       <% @book_copies.each do |book_copy| %>
         <tr>
           <td><%= book_copy.book_copy_no %></td>
@@ -19,7 +20,12 @@
           <td><%= book_copy.issues.pluck(:fine).join(', ') %></td>
         </tr>
       <% end %>
-    </div>
+    <% else %>
+      <tr>
+        <td class="text-center" colspan="5"> No Copies available </td>
+      </tr>
+    <% end %>
+  </div>
   </tbody>
 </table>
 

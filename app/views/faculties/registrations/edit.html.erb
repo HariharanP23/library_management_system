@@ -1,68 +1,91 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="margin: 0;">Edit <%= resource_name.to_s.humanize %></h1>
+  <%= link_to "Back ", :back, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
+</div>
 
-<!--<h3>Cancel my account</h3>-->
+<div class="container", style="margin-top: 20px">
+  <div class="row">
+    <div class="col-md-8">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
+        <div class="field-set" style="width: 90%; box-sizing: border-box;">
+          <div class="row">
+            <div class="col">
+              <%= form.label :email, style: "display: block", class: "mandatory" %>
+              <%= form.email_field :email, autofocus: true, class: "form-input", placeholder: "@UserName" %>
+              <% if resource.errors[:eamil].any? %>
+                <div style="color: red;"><%= resource.errors[:name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :password, style: "display: block" %> <i>(leave blank if you don't want to change it)</i><br />
+              <%= form.password_field :password, autocomplete: "new-password", class: "form-input" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+          </div>
 
-<!--<div>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>-->
+          <div class="row">
+            <div class="col", style="margin-top: -45px">
+              <%= form.label :current_password, style: "display: block", class: "mandatory" %><i>(we need your current password to confirm your changes)</i><br />
+              <%= form.text_field :current_password, class: "form-input", autocomplete: "current-password", placeholder: "User" %>
+              <% if resource.errors[:first_name].any? %>
+                <div style="color: red;"><%= resource.errors[:first_name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :password_confirmation, style: "display: block" %>
+              <%= form.text_field :password_confirmation, class: "form-input", placeholder: "User", autocomplete: "new-password" %>
+            </div>
+          </div>
 
-<%#= link_to "Back", :back %>
+          <div class="row">
+            <div class="col">
+              <%= form.label :first_name, style: "display: block", class: "mandatory" %>
+              <%= form.text_field :first_name, class: "form-input", placeholder: "User" %>
+              <% if resource.errors[:first_name].any? %>
+                <div style="color: red;"><%= resource.errors[:first_name].first %></div>
+              <% end %>
+            </div>
+            <div class="col">
+              <%= form.label :last_name, style: "display: block" %>
+              <%= form.text_field :last_name, class: "form-input", placeholder: "User" %>
+            </div>
+          </div>
 
-<div class="overlay">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="row">
+            <div class="col">
+              <%= form.label :dob, style: "display: block" %>
+              <%= form.date_field :dob, class: "form-input" %>
+            </div>
+            <div class="col">
+              <%= form.label :phone_no, style: "display: block" %>
+              <%= form.text_field :phone_no, class: "form-input" %>
+            </div>
+          </div>
 
-    <div class="con">
-      <header class="head-form">
-        <h2>Edit <%= resource_name.to_s.humanize %></h2>
-        <p>update here using your username and password</p>
-      </header>
-      <br>
-      <div class="field-set">
-        <table>
-        <tr>
-          <td>
-            <%= f.text_field :first_name, autofocus: true, class: "form-input", placeholder: "UserName" %>
-          </td>
-          <td>
-            <%= f.text_field :last_name, class: "form-input", placeholder: "H" %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= f.date_field :doj, class: "form-input"  %>
-          </td>
-          <td>
-            <%= f.date_field :dob, class: "form-input"  %>
-          </td>
-        </tr>
-          <tr>
-            <td>
-              <%= f.email_field :email, autocomplete: "email", class: "form-input", placeholder: "@UserName" %>
-            </td>
-            <td>
-              <%= f.password_field :current_password, autocomplete: "current-password", autofocus: true, class: "form-input", placeholder: "Password" %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= f.password_field :password, autocomplete: "current-password", autofocus: true, class: "form-input", placeholder: "Password" %>
-              <%# if @minimum_password_length %>
-<!--                <br />-->
-<!--                <em><%#= @minimum_password_length %> characters minimum</em>-->
-              <%# end %>
-            </td>
-            <td>
-              <%= f.password_field :password_confirmation, autocomplete: "current-password", autofocus: true, class: "form-input", placeholder: "Password" %>
-            </td>
-          </tr>
-        </table>
+          <div class="field">
+            <%= form.label :logo, "User Avatar", class:"form-label" %>
+            <%= form.file_field :logo, accept: 'image/png,image/gif,image/jpeg,image/jfif', class:"form-control form-input form-control-sm", id:"formFileSm" %>
+          </div>
 
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
-
-        <div class="actions">
-          <%= f.submit "Update", class: "log-in" %>
+          <div class="actions">
+            <%= form.submit class: "log-in" %>
+          </div>
         </div>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <div class="field-set">
+        <%= image_tag 'login.jpg', alt: 'Example Image', class: "img-fluid" %>
+      </div>
+      <div>
+        <h3>Cancel my account</h3>
+
+        <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+
       </div>
     </div>
-  <% end %>
+  </div>
 </div>

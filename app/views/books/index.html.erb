@@ -30,8 +30,14 @@
   </thead>
   <tbody>
   <div id="users">
+    <% if @books.present? %>
     <% @books.each do |book| %>
       <%= render book %>
+    <% end %>
+      <% else %>
+      <tr>
+        <td class="text-center" colspan="9"> No Books available </td>
+      </tr>
     <% end %>
   </div>
   </tbody>

@@ -1,18 +1,21 @@
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <h1 style="margin: 0;">Entries</h1>
-  <%= link_to "Issues", user_issues_path(@member.id) %>
+  <div style="display: flex;justify-content: space-between;">
+    <h1><%= link_to "Entries", user_path(@member.id) %></h1>
+    <h1><%= link_to "Issues", user_issues_path(@member.id) %></h1>
+  </div>
   <button type="button" class="btn" data-toggle="modal" data-target="#example1Modal", style="padding: 15px 15px; color:blue; border-color: blue">New issue</button>
+  <%= link_to "Back to members", users_path, class: "btn", style: "padding: 15px 15px; color:blue; border-color: blue" %>
 </div>
 
 <table class="table table-hover", style="text-align: left;">
   <thead>
   <tr>
     <th style="width: 15%;"><%= sort_link(@q, 'members.code', "Member code", default_order: :desc) %></th>
-    <th style="width: 15%;"><%= sort_link(@q, :'book_copy.book_copy_no', "book code") %></th>
-    <th style="width: 15%;"><%= sort_link(@q, 'book.title', "Book") %></th>
-    <th style="width: 15%;"><%= sort_link(@q, :description, "description") %></th>
-    <th style="width: 15%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
-    <th>Action</th>
+    <th style="width: 13%;"><%= sort_link(@q, :'book_copy.book_copy_no', "book code") %></th>
+    <th style="width: 20%;"><%= sort_link(@q, 'book.title', "Book") %></th>
+    <th ><%= sort_link(@q, :description, "description") %></th>
+    <th style="width: 10%;"><%= sort_link(@q, :fine_amount, "Fine amount") %></th>
+    <th style="width: 7%;">Action</th>
   </tr>
   </thead>
   <tbody>
@@ -29,7 +32,9 @@
         </tr>
       <% end %>
     <% else %>
-      <p> No entries available </p>
+      <tr>
+        <td class="text-center" colspan="9"> No Issues available </td>
+      </tr>
     <% end %>
   </div>
   </tbody>

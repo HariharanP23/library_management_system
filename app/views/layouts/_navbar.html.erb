@@ -2,14 +2,18 @@
   <% puts "cont name => #{controller_name}" %>
   <% puts "action name => #{action_name}" %>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #cbdeec;">
-    <a class="navbar-brand" href="#">
-      <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+    <a class="navbar-brand" href="#", style="margin-left: 20px">
+      <% if current_faculty.library.logo.present? %>
+        <%= image_tag current_faculty.library.logo, width:"60", height:"30" %>
+      <% else %>
+        <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+    <% end %>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav", style="margin-right: 20px">
         <li class="nav-item">
           <a class="navbar-brand" href="/books">Book</a>
         </li>
@@ -29,21 +33,31 @@
           <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
         </li>
         <li class="nav-item">
-          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+          <div class="header_img">
+            <% if current_faculty.library.logo.present? %>
+              <%= image_tag current_faculty.library.logo, width:"60", height:"40" %>
+            <% else %>
+              <img src="https://i.imgur.com/hczKIze.jpg" alt="">
+            <% end %>
+          </div>
         </li>
       </ul>
     </div>
   </nav>
   <% elsif faculty_signed_in? && current_faculty.admin? %>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#">
-      <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+    <a class="navbar-brand" href="#", style="margin-left: 20px">
+      <% if current_faculty.library.logo.present? %>
+        <%= image_tag current_faculty.library.logo, width:"60", height:"30" %>
+      <% else %>
+        <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+      <% end %>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav", style="margin-right: 20px">
         <li class="nav-item active">
           <a class="navbar-brand" href="/categories">Category <span class="sr-only">(current)</span></a>
         </li>
@@ -63,21 +77,31 @@
           <%= link_to 'Sign out', destroy_faculty_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
         </li>
         <li class="nav-item">
-          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+          <div class="header_img">
+            <% if current_faculty.library.logo.present? %>
+              <%= image_tag current_faculty.library.logo, width:"60", height:"40" %>
+            <% else %>
+              <img src="https://i.imgur.com/hczKIze.jpg" alt="">
+            <% end %>
+          </div>
         </li>
       </ul>
     </div>
   </nav>
   <% elsif member_signed_in? %>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#">
-      <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+    <a class="navbar-brand" href="#", style="margin-left: 20px">
+      <% if current_member.library.logo.present? %>
+        <%= image_tag current_member.library.logo, width:"60", height:"30" %>
+      <% else %>
+        <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+      <% end %>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav", style="margin-right: 20px">
         <li class="nav-item">
           <a class="navbar-brand" href="/login_members/books">Book</a>
         </li>

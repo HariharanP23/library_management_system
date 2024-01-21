@@ -7,6 +7,8 @@ class Member < ApplicationRecord
   belongs_to :library
   has_many :entries
   has_many :issues
+  has_one_attached :profile
+
   # callback
   after_create :update_code
   # validation
