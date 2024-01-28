@@ -1,0 +1,11 @@
+<p>Dear <%= @user.first_name.present? ? @user.first_name : @email.split('@').first %>,<br/></p>
+
+<p>We hope this email finds you well. We wanted to remind you that your membership plan with us has expired,
+and we'd love to continue providing you with our services.<br/></p>
+
+<p>Member Code: <%= @user.code %><br/></p>
+
+<p>To ensure uninterrupted access to our offerings, please take a moment to renew your membership.
+Your satisfaction is our priority, and we want to make sure you continue to enjoy the benefits of being a member.<br/></p>
+
+<p>If you have already renewed, we sincerely thank you for your continued support.</p>

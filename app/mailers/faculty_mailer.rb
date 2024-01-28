@@ -4,49 +4,13 @@ class FacultyMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome_email.subject
   #
-  def welcome_email(email)
+  def welcome_email(email, library_name, role)
     @email = email
+    @name = library_name
+    @role = role
     mail(
       to: email,
-      subject: "Welcome to Project"
-    )
-  end
-  def expiration_reminder(user)
-    @email = user.email
-    from_email = user.library.email
-    staff = user.library.faculties.where(user_type: 'Staff').pluck(:email)
-    @days_until_expiration = user.expired_at - Date.today
-    mail(
-      from: from_email,
-      to: @email,
-      cc: staff,
-      subject: "Your subscription is expiring soon"
-    )
-  end
-
-  def plan_expired(user)
-    @user = user
-    from_email = user.library.email
-    staff = user.library.faculties.where(user_type: 'Staff').pluck(:email)
-    @days_until_expiration = user.expired_at - Date.today
-    mail(
-      from: from_email,
-      to: user.email,
-      cc: staff,
-      subject: "Your subscription plan is expired"
-    )
-  end
-
-  def reminder_due_date(user)
-    @user = user
-    from_email = user.library.email
-    staff = user.library.faculties.where(user_type: 'Staff').pluck(:email)
-    @days_until_expiration = user.expired_at - Date.today
-    mail(
-      from: from_email,
-      to: user.email,
-      cc: staff,
-      subject: "Your subscription plan is expired"
+      subject: "Welcome to Our Team #{library_name}"
     )
   end
 end

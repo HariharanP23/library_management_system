@@ -1,0 +1,11 @@
+Dear <%= @user.first_name.present? ? @user.first_name : @email.split('@').first %>,<br/>
+
+We hope this message finds you well. This is a friendly reminder that your Member Code is set to expire in just <%= @days_until_expiration %> days.<br/>
+
+Member Code: <%= @user.code %><br/>
+
+We value your continued membership, and to ensure uninterrupted access to our services, please take a moment to renew your membership before the expiration date.<br/>
+
+If you have already renewed, we sincerely thank you for your prompt attention to this matter.<br/><br/>
+
+Thank you for being a valued member of <%= @user.library.name %>>. We appreciate your continued support.

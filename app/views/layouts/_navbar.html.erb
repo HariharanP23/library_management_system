@@ -34,8 +34,8 @@
         </li>
         <li class="nav-item">
           <div class="header_img">
-            <% if current_faculty.library.logo.present? %>
-              <%= image_tag current_faculty.library.logo, width:"60", height:"40" %>
+            <% if current_faculty.avatar.present? %>
+              <%= image_tag current_faculty.avatar, width:"60", height:"40" %>
             <% else %>
               <img src="https://i.imgur.com/hczKIze.jpg" alt="">
             <% end %>
@@ -59,7 +59,7 @@
     <div class="collapse navbar-collapse justify-content-end mr-2" id="navbarNav">
       <ul class="navbar-nav", style="margin-right: 20px">
         <li class="nav-item active">
-          <a class="navbar-brand" href="/categories">Category <span class="sr-only">(current)</span></a>
+          <a class="navbar-brand" href="/categories">Category <span class="sr-only"></span></a>
         </li>
         <li class="nav-item">
           <a class="navbar-brand" href="/books">Book</a>
@@ -78,8 +78,8 @@
         </li>
         <li class="nav-item">
           <div class="header_img">
-            <% if current_faculty.library.logo.present? %>
-              <%= image_tag current_faculty.library.logo, width:"60", height:"40" %>
+            <% if current_faculty.avatar.present? %>
+              <%= image_tag current_faculty.avatar, width:"60", height:"40" %>
             <% else %>
               <img src="https://i.imgur.com/hczKIze.jpg" alt="">
             <% end %>
@@ -115,7 +115,13 @@
           <%= link_to 'Sign out', destroy_member_session_path, data: { "turbo-method": :delete }, class: 'navbar-brand' %>
         </li>
         <li class="nav-item">
-          <div class="header_img"><img src="https://i.imgur.com/hczKIze.jpg" alt=""></div>
+          <div class="header_img">
+            <% if current_member.profile.present? %>
+              <%= image_tag current_member.profile, width:"60", height:"30" %>
+            <% else %>
+              <%= image_tag 'login.jpg', width:"30", height:"30", alt:""%>
+            <% end %>
+          </div>
         </li>
       </ul>
     </div>

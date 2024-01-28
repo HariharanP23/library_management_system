@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     @member.password = '123456'
     respond_to do |format|
       if @member.save
+        MemberMailer.welcome_email(@staff).deliver_later
         format.html { redirect_to user_url(@member), notice: "Member was successfully created." }
         format.json { render :show, status: :created, location: @member }
       else

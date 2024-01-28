@@ -1,0 +1,19 @@
+Dear <%= @user.first_name.present? ? @user.first_name : @email.split('@').first %>,<br/>
+
+This is a friendly reminder that the scheduled entry for the book titled "<%= @entry.book.title %>" is approaching,
+and it is set to occur tomorrow.<br/><br/>
+
+Book Title: <%= @entry.book.title %><br/>
+Scheduled Entry Date: <%= @entry.start_date %><br/>
+<br/>
+
+Please ensure that all necessary preparations have been made for the book entry process.
+If you have any specific requirements or if there are any changes to the schedule,
+please notify the relevant team members or supervisors promptly.<br/>
+
+Your attention to this matter is greatly appreciated as it helps maintain the accuracy and
+efficiency of our library catalog.<br/>
+
+If you have any questions or concerns, feel free to reach out.<br/>
+
+Thank you for your diligence in maintaining our library's records.<br/>

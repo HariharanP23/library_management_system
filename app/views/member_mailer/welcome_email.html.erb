@@ -1,0 +1,13 @@
+Dear <%= @name %>>,<br/>
+
+Welcome to our Library Management System! We are thrilled to have you as a member of our library community.
+With this system, you can easily explore our vast collection of books, manage your account,
+and enjoy a seamless library experience.<br/>
+
+Here are your login credentials:
+
+Username: <%= @email %>><br/>
+Password: 123456<br/>
+To get started, simply click on the following link to access the Library Management System:<br/>
+
+<%= link_to 'click here to login ', new_session_path(:member) %><br/>

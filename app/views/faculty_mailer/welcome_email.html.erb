@@ -1,8 +1,31 @@
-Hii <%= @email %>
-you have account was successfully in the Library Management system
-Thanks for joining and have a great day!
+Dear <%= @email %><br/>
 
-user name: <%= @email %>
-password : 123456
+On behalf of the entire <%= @name %> team, I am delighted to extend a warm welcome to you!
+We are thrilled to have you join us as our newest team member and are confident that your
+skills and talents will contribute significantly to our success.<br/>
 
-<%= link_to 'click here to login ', new_session_path(:faculty) %>
+Your role is crucial to the growth and efficiency of our organization,
+and we are excited to embark on this journey together. As you settle into your new position,
+please feel free to reach out if you have any questions or need assistance.
+Our team is here to support you every step of the way.<br/>
+
+Here are a few details to help you get started:<br/>
+
+Your Position: <%= role %><br/>
+Start Date: <%= Date.today %><br/>
+
+
+Here are your login credentials:<br/>
+
+Username: <%= @email %><br/>
+Password: '123456'<br/>
+To get started, simply click on the following link to access the Library Management System:<br/>
+
+<%= link_to 'click here to login ', new_session_path(:faculty) %><br/>
+<!--Work Hours: [Your Work Hours, if applicable]-->
+Please ensure the confidentiality of your login details and do not share them with anyone.
+If you have any concerns or questions, feel free to reach out to our support team at [support@email.com].
+
+
+Once again, welcome to the <%= @name %> family!
+We look forward to working closely with you and achieving great things together.

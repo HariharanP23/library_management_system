@@ -16,7 +16,7 @@ class StaffsController < ApplicationController
 
     respond_to do |format|
       if @staff.save
-        FacultyMailer.welcome_email(@staff.email).deliver_later
+        FacultyMailer.welcome_email(@staff.email, @staff.library.name, @staff.user_type).deliver_later
         format.html { redirect_to staffs_path, notice: "faculty was successfully created." }
         format.json { render :index, status: :created, location: @staff }
       else
