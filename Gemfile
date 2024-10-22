@@ -80,7 +80,7 @@ gem 'rubocop', '~> 1.59'
 gem "pagy", "~> 6.2"
 gem "ransack", "~> 4.1"
 
-gem "letter_opener", "~> 1.8"
+gem "letter_opener", "~> 1.10"
 gem 'sassc-rails'
 
 gem "rufus-scheduler", "~> 3.9"
