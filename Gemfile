@@ -71,7 +71,7 @@ gem 'strong_migrations', '~> 1.6'
 gem 'devise', '~> 4.9'
 
 gem 'fasterer', '~> 0.11.0'
-gem 'reek', '~> 6.2'
+gem 'reek', '~> 6.3'
 
 gem 'bullet', '~> 7.1'
 
