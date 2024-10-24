@@ -73,7 +73,7 @@ gem 'devise', '~> 4.9'
 gem 'fasterer', '~> 0.11.0'
 gem 'reek', '~> 6.3'
 
-gem 'bullet', '~> 7.1'
+gem 'bullet', '~> 7.2'
 
 gem 'rubocop', '~> 1.67'
 
