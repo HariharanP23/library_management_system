@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# StaffsController
 class StaffsController < ApplicationController
   before_action :require_admin
   before_action :set_library
@@ -20,7 +23,7 @@ class StaffsController < ApplicationController
     respond_to do |format|
       if @staff.save
         FacultyMailer.welcome_email(@staff.email).deliver_later
-        format.html { redirect_to staffs_path, notice: "faculty was successfully created." }
+        format.html { redirect_to staffs_path, notice: 'faculty was successfully created.' }
         format.json { render :index, status: :created, location: @staff }
       else
         format.html { render :new, status: :unprocessable_entity }

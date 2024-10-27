@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+# IssuesController
 class IssuesController < ApplicationController
   before_action :require_staff
   before_action :set_library
   before_action :set_user
-  before_action :set_issue, only: %i[ destroy ]
+  before_action :set_issue, only: %i[destroy]
 
   # GET /issues or /issues.json
   def index
@@ -26,7 +29,7 @@ class IssuesController < ApplicationController
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to user_issues_path(@member.id), notice: "Issue was successfully created." }
+        format.html { redirect_to user_issues_path(@member.id), notice: 'Issue was successfully created.' }
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,16 +43,17 @@ class IssuesController < ApplicationController
     @issue.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_issues_url(@member.id), notice: "Issue was successfully destroyed." }
+      format.html { redirect_to user_issues_url(@member.id), notice: 'Issue was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_issue
-      @issue = Issue.find(params[:id])
-    end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_issue
+    @issue = Issue.find(params[:id])
+  end
 
   def set_library
     @library = Library.find(current_faculty.library_id)
@@ -59,8 +63,8 @@ class IssuesController < ApplicationController
     @member = @library.members.find(params[:user_id])
   end
 
-    # Only allow a list of trusted parameters through.
-    def issue_params
-      params.require(:issue).permit(:book_copy_id, :member_id, :library_id, :fine, :description, :book_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def issue_params
+    params.require(:issue).permit(:book_copy_id, :member_id, :library_id, :fine, :description, :book_id)
+  end
 end

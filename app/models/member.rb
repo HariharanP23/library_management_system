@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -16,11 +18,11 @@ class Member < ApplicationRecord
     update_attribute(:code, (id + 0.to_i).to_s.rjust(6, '0'))
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["entries", "library"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[entries library]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["amount", "code", "created_at", "dob", "email", "expired_at", "id", "library_id", "name", "phone_no", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[amount code created_at dob email expired_at id library_id name phone_no updated_at]
   end
 end

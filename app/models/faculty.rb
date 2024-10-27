@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Faculty < ApplicationRecord
   # Include default faculties modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -16,12 +18,12 @@ class Faculty < ApplicationRecord
     user_type == 'Staff'
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["library"]
+  def self.ransackable_associations(_auth_object = nil)
+    ['library']
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "dob", "doj", "email", "first_name", "id", "last_name", "library_id", "phone_no", "updated_at",
-     "user_type"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at dob doj email first_name id last_name library_id phone_no updated_at
+       user_type]
   end
 end

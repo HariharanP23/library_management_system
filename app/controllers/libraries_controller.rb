@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# LibrariesController
 class LibrariesController < ApplicationController
-  before_action :require_admin, except: %i[ new create ]
-  skip_before_action :authenticate_faculty!, only: %i[ new create ]
-  before_action :set_library, only: %i[ show edit update destroy ]
+  before_action :require_admin, except: %i[new create]
+  skip_before_action :authenticate_faculty!, only: %i[new create]
+  before_action :set_library, only: %i[show edit update destroy]
 
   # GET /libraries or /libraries.json
   # def index
@@ -28,8 +31,7 @@ class LibrariesController < ApplicationController
   end
 
   # GET /libraries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /libraries or /libraries.json
   def create
@@ -37,7 +39,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.save
-        format.html { redirect_to library_url(@library), notice: "Library was successfully created." }
+        format.html { redirect_to library_url(@library), notice: 'Library was successfully created.' }
         format.json { render :show, status: :created, location: @library }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,7 +52,7 @@ class LibrariesController < ApplicationController
   def update
     respond_to do |format|
       if @library.update(library_params)
-        format.html { redirect_to library_url(@library), notice: "Library was successfully updated." }
+        format.html { redirect_to library_url(@library), notice: 'Library was successfully updated.' }
         format.json { render :show, status: :ok, location: @library }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,19 +66,21 @@ class LibrariesController < ApplicationController
     @library.destroy!
 
     respond_to do |format|
-      format.html { redirect_to libraries_url, notice: "Library was successfully destroyed." }
+      format.html { redirect_to libraries_url, notice: 'Library was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_library
-      @library = Library.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def library_params
-      params.require(:library).permit(:library_id, :name, :location, :established_date, :opening_hours_start, :opening_hours_end, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_library
+    @library = Library.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def library_params
+    params.require(:library).permit(:library_id, :name, :location, :established_date, :opening_hours_start,
+                                    :opening_hours_end, :email)
+  end
 end

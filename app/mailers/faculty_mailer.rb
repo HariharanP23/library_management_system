@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FacultyMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -8,9 +10,10 @@ class FacultyMailer < ApplicationMailer
     @email = email
     mail(
       to: email,
-      subject: "Welcome to Project"
+      subject: 'Welcome to Project'
     )
   end
+
   def expiration_reminder(user)
     @email = user.email
     from_email = user.library.email
@@ -20,7 +23,7 @@ class FacultyMailer < ApplicationMailer
       from: from_email,
       to: @email,
       cc: staff,
-      subject: "Your subscription is expiring soon"
+      subject: 'Your subscription is expiring soon'
     )
   end
 
@@ -33,7 +36,7 @@ class FacultyMailer < ApplicationMailer
       from: from_email,
       to: user.email,
       cc: staff,
-      subject: "Your subscription plan is expired"
+      subject: 'Your subscription plan is expired'
     )
   end
 
@@ -46,7 +49,7 @@ class FacultyMailer < ApplicationMailer
       from: from_email,
       to: user.email,
       cc: staff,
-      subject: "Your subscription plan is expired"
+      subject: 'Your subscription plan is expired'
     )
   end
 end

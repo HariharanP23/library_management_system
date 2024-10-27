@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Book < ApplicationRecord
   belongs_to :category
   belongs_to :library
@@ -17,12 +19,12 @@ class Book < ApplicationRecord
     end
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["category", "entries", "library"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[category entries library]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["author", "category_id", "copies_available", "created_at", "description", "id", "isbn", "library_id", "price",
-     "published_date", "row", "title", "total_copies", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[author category_id copies_available created_at description id isbn library_id price
+       published_date row title total_copies updated_at]
   end
 end

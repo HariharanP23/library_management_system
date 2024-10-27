@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# UsersController
 class UsersController < ApplicationController
   before_action :require_staff
   before_action :set_library
-  before_action :set_member, only: %i[ show edit update ]
+  before_action :set_member, only: %i[show edit update]
 
   # GET /members or /members.json
   def index
@@ -24,8 +27,7 @@ class UsersController < ApplicationController
   end
 
   # GET /members/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /members or /members.json
   def create
@@ -34,7 +36,7 @@ class UsersController < ApplicationController
     @member.password = '123456'
     respond_to do |format|
       if @member.save
-        format.html { redirect_to user_url(@member), notice: "Member was successfully created." }
+        format.html { redirect_to user_url(@member), notice: 'Member was successfully created.' }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +49,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to user_url(@member), notice: "Member was successfully updated." }
+        format.html { redirect_to user_url(@member), notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -79,7 +81,8 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_library
     @library = Library.find(current_faculty.library_id)
   end
@@ -88,8 +91,9 @@ class UsersController < ApplicationController
     @member = @library.members.find(params[:id])
   end
 
-    # Only allow a list of trusted parameters through.
-    def member_params
-      params.require(:member).permit(:first_name, :last_name, :code, :email, :dob, :phone_no, :expired_at, :amount, :library_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def member_params
+    params.require(:member).permit(:first_name, :last_name, :code, :email, :dob, :phone_no, :expired_at, :amount,
+                                   :library_id)
+  end
 end

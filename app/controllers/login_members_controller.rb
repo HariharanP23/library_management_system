@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# LoginMembersController
 class LoginMembersController < ApplicationController
   skip_before_action :authenticate_faculty!
   before_action :authenticate_member!
@@ -16,6 +19,7 @@ class LoginMembersController < ApplicationController
   end
 
   private
+
   def set_library
     @library = Library.find(current_member.library_id)
   end

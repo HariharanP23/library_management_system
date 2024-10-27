@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 SCHEDULER = Rufus::Scheduler.new
 
 SCHEDULER.every '1d' do

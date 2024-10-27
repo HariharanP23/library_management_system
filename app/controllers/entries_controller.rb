@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
+# EntriesController
 class EntriesController < ApplicationController
   before_action :require_staff
   before_action :set_library
   before_action :set_member
-  before_action :set_entry, only: %i[ edit update destroy update_return_date ]
+  before_action :set_entry, only: %i[edit update destroy update_return_date]
 
   # GET /entries/new
   def new
@@ -15,8 +18,7 @@ class EntriesController < ApplicationController
   end
 
   # GET /entries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /entries or /entries.json
   def create
@@ -24,7 +26,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to user_path(@member.id), notice: "Entry was successfully created." }
+        format.html { redirect_to user_path(@member.id), notice: 'Entry was successfully created.' }
         format.json { render :show, status: :created, location: @entry }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +39,7 @@ class EntriesController < ApplicationController
   def update
     respond_to do |format|
       if @entry.update(entry_params)
-        format.html { redirect_to member_url(@member.id), notice: "Entry was successfully updated." }
+        format.html { redirect_to member_url(@member.id), notice: 'Entry was successfully updated.' }
         format.json { render :show, status: :ok, location: @entry }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,13 +53,14 @@ class EntriesController < ApplicationController
     @entry.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_url(@member.id), notice: "Entry was successfully destroyed." }
+      format.html { redirect_to user_url(@member.id), notice: 'Entry was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_library
     @library = Library.find(current_faculty.library_id)
   end
@@ -66,22 +69,23 @@ class EntriesController < ApplicationController
     @member = Member.find(params[:user_id])
   end
 
-    def set_entry
-      @entry = @member.entries.find(params[:id])
-    end
+  def set_entry
+    @entry = @member.entries.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def entry_params
-      params.require(:entry).permit(:book_id, :start_date, :due_date, :return_date, :fine_amount, :member_id, :library_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def entry_params
+    params.require(:entry).permit(:book_id, :start_date, :due_date, :return_date, :fine_amount, :member_id,
+                                  :library_id)
+  end
 
   def calculate(entry)
-    if entry.due_date.present?
-      fine = 0
-      date_difference = Date.today - entry.due_date
-      fine_per_day = 10
-      fine = date_difference * fine_per_day if date_difference > 0
-      fine
-    end
+    return unless entry.due_date.present?
+
+    fine = 0
+    date_difference = Date.today - entry.due_date
+    fine_per_day = 10
+    fine = date_difference * fine_per_day if date_difference.positive?
+    fine
   end
 end

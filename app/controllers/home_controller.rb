@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# HomeController
 class HomeController < ApplicationController
-  skip_before_action :authenticate_faculty!, only: %i[ index ]
+  skip_before_action :authenticate_faculty!, only: %i[index]
 
   def index
     if faculty_signed_in? && current_faculty.admin?
