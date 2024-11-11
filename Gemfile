@@ -79,7 +79,7 @@ gem 'bullet', '~> 7.2'
 
 gem 'rubocop', '~> 1.68'
 
-gem 'pagy', '~> 9.1'
+gem 'pagy', '~> 9.2'
 gem 'ransack', '~> 4.2'
 
 gem 'letter_opener', '~> 1.10'
