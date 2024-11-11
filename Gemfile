@@ -68,7 +68,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'strong_migrations', '~> 2.0'
+gem 'strong_migrations', '~> 2.1'
 
 gem 'devise', '~> 4.9'
 
