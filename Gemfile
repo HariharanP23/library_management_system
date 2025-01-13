@@ -77,7 +77,7 @@ gem 'reek', '~> 6.3'
 
 gem 'bullet', '~> 8.0'
 
-gem 'rubocop', '~> 1.69'
+gem 'rubocop', '~> 1.70'
 
 gem 'pagy', '~> 9.3'
 gem 'ransack', '~> 4.2'
